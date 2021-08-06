@@ -7,7 +7,7 @@ import androidx.annotation.LayoutRes;
  * @CreateTime 2021/8/5 14:06
  * @Description TODO
  */
-public interface IModel {
+public interface IViewModel {
 
     @LayoutRes
     int getLayoutId();
