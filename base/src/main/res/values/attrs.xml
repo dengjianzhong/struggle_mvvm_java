@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="TitleBarView">
+        <!--设置返回图标颜色,默认颜色#000000-->
+        <attr name="back_icon_color" format="color" />
+        <!--设置居中标题文本-->
+        <attr name="center_title" format="string" />
+        <!--设置居中标题文本颜色,默认颜色#2a2a2a-->
+        <attr name="center_title_color" format="color" />
+        <!--设置居中标题大小,默认16sp,单位sp-->
+        <attr name="center_title_size" format="float" />
+    </declare-styleable>
+</resources>

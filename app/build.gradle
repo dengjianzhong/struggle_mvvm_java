@@ -1,0 +1,34 @@
+plugins {
+    id 'com.android.application'
+}
+apply from: '../config.gradle'
+
+android {
+    defaultConfig {
+        applicationId "com.zhong.struggle_mvvm"
+    }
+
+    buildTypes {
+        release {
+            //启用代码缩减、混淆处理和优化
+            minifyEnabled false
+            //启用资源文件缩减、优化
+            shrinkResources false
+            //默认混淆文件（无内容需要自己添加）
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    implementation project(path: ':base')
+}

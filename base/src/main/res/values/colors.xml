@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_000000">#000000</color>
+    <color name="color_FFFFFF">#ffffff</color>
+    <color name="color_38B3FF">#38B3FF</color>
+    <color name="color_D8F5FF">#D8F5FF</color>
+    <color name="color_C2C2C2">#C2C2C2</color>
+    <color name="color_85D1FF">#85D1FF</color>
+    <color name="color_2A2A2A">#2a2a2a</color>
+    <color name="color_505050">#505050</color>
+    <color name="color_6C6C6C">#6C6C6C</color>
+    <color name="color_3FCCFF">#3FCCFF</color>
+    <color name="color_EDEDED">#EDEDED</color>
+    <color name="color_FC6969">#FC6969</color>
+    <color name="color_979797">#979797</color>
+    <color name="color_F4F4F4">#F4F4F4</color>
+    <color name="color_3EC1FF">#3EC1FF</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_FF9F05">#FF9F05</color>
+    <color name="color_DDDDDD">#DDDDDD</color>
+    <color name="color_B9E8FF">#B9E8FF</color>
+    <color name="color_AEFFD7">#AEFFD7</color>
+    <color name="color_53E69D">#53E69D</color>
+    <color name="color_6F6CFF">#6F6CFF</color>
+    <color name="color_C3E8FF">#C3E8FF</color>
+    <color name="color_FED3D3">#FED3D3</color>
+    <color name="color_DBF6FF">#DBF6FF</color>
+    <color name="color_D6F4FF">#D6F4FF</color>
+    <color name="color_FFC1BD">#FFC1BD</color>
+    <color name="color_FC6A6A">#FC6A6A</color>
+    <color name="color_378BFF">#378BFF</color>
+    <color name="color_79ECB3">#79ECB3</color>
+    <color name="color_B5B5B5">#B5B5B5</color>
+    <!--透明色-->
+    <color name="color_00000000">#00000000</color>
+    <color name="color_E0E0E0">#E0E0E0</color>
+</resources>

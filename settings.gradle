@@ -1,0 +1,3 @@
+rootProject.name = "struggle_mvvm_java"
+include ':app'
+include ':base'
