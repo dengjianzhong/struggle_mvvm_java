@@ -2,7 +2,7 @@ package com.zhong.struggle_mvvm;
 
 import android.view.View;
 
-import com.struggle.base.base.BaseFragment;
+import com.struggle.base.base.basics.BaseFragment;
 
 /**
  * @Author 邓建忠
@@ -20,8 +20,11 @@ public class MyFragment extends BaseFragment {
         getView().findViewById(R.id.btTest).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyDialog dialog = new MyDialog();
-                dialog.show(getChildFragmentManager(),"");
+                /*MyDialog dialog = new MyDialog();
+                dialog.show(getChildFragmentManager());*/
+
+                MyPopupWindow window = new MyPopupWindow(getContext());
+                window.showAsDropDown(v);
             }
         });
     }

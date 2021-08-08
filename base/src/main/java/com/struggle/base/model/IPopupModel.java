@@ -37,5 +37,9 @@ public interface IPopupModel {
 
     int getWindowHeight();
 
+    //设置暗影体现出立体
     int getWindowElevation();
+
+    //设置点击外部是否可以取消
+    boolean isCanTCancel();
 }

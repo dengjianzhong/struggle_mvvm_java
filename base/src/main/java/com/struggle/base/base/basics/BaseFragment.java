@@ -1,11 +1,8 @@
-package com.struggle.base.base;
+package com.struggle.base.base.basics;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +11,8 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
 
-import com.struggle.base.R;
-import com.struggle.base.model.IDialogModel;
 import com.struggle.base.model.IViewModel;
 
 import org.greenrobot.eventbus.EventBus;
@@ -27,15 +22,7 @@ import org.greenrobot.eventbus.EventBus;
  * @CreateTime 2021/8/5 11:47
  * @Description TODO
  */
-public abstract class BaseDialog extends DialogFragment implements IDialogModel {
-
-    //获取屏幕参数
-    private DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
-
-    @Override
-    public int getTheme() {
-        return R.style.alertDialog;
-    }
+public abstract class BaseFragment extends Fragment implements IViewModel {
 
     @Nullable
     @Override
@@ -55,34 +42,6 @@ public abstract class BaseDialog extends DialogFragment implements IDialogModel 
         initData();
         initEvent();
         initSoftKeyboard();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        Window window;
-        {
-            window = getDialog().getWindow();
-            window.setWindowAnimations(getAnimationStyle());
-            window.setLayout(getWidth(), getHeight());
-            window.setGravity(getGravity());
-        }
-    }
-
-    @Override
-    public int getGravity() {
-        return Gravity.CENTER;
-    }
-
-    @Override
-    public int getHeight() {
-        return -2;
-    }
-
-    @Override
-    public int getWidth() {
-        return (int) (metrics.widthPixels * 0.8);
     }
 
     /**

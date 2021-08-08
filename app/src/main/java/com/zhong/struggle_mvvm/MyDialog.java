@@ -1,6 +1,6 @@
 package com.zhong.struggle_mvvm;
 
-import com.struggle.base.base.BaseDialog;
+import com.struggle.base.base.basics.BaseDialog;
 
 /**
  * @Author 邓建忠

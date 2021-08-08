@@ -31,11 +31,20 @@ public interface IViewModel {
     }
 
     /**
-     * 禁止横批
+     * 禁止横屏
      * <p>
      * true 默认开启
      */
     default boolean disableHorizontalScreen() {
+        return true;
+    }
+
+    /**
+     * 禁用设置Activity setContentView
+     * <p>
+     * true 默认开启
+     */
+    default boolean disableSetView() {
         return true;
     }
 }
