@@ -1,7 +1,7 @@
 package com.zhong.struggle_mvvm.model;
 
 import com.struggle.base.base.BaseViewModel;
-import com.struggle.base.bean.DataResponse;
+import com.struggle.base.app.bean.DataResponse;
 import com.struggle.base.launcher.IOHandler;
 
 /**

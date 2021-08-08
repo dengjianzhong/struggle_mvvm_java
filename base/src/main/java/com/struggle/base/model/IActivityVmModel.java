@@ -5,7 +5,7 @@ package com.struggle.base.model;
  * @CreateTime 2021/8/8 15:39
  * @Description TODO
  */
-public interface IVMModel {
+public interface IActivityVmModel {
     void initViewModel();
 
     void observer();

@@ -102,12 +102,14 @@ public abstract class BaseDialog extends DialogFragment implements IDialogModel 
      * 隐藏软键盘
      */
     private void hideSoftKeyboard() {
-        // 隐藏软键盘，避免软键盘引发的内存泄露
-        View view = getActivity().getCurrentFocus();
-        if (view != null) {
-            InputMethodManager manager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            if (manager != null && manager.isActive(view)) {
-                manager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        if (isResumed()) {
+            // 隐藏软键盘，避免软键盘引发的内存泄露
+            View view = getActivity().getCurrentFocus();
+            if (view != null) {
+                InputMethodManager manager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (manager != null && manager.isActive(view)) {
+                    manager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                }
             }
         }
     }

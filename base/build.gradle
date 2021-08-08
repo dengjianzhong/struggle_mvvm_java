@@ -38,9 +38,6 @@ dependencies {
     api "androidx.room:room-runtime:$room_version"
     annotationProcessor  "androidx.room:room-compiler:$room_version"
 
-    //anko
-    api "org.jetbrains.anko:anko:0.10.8"
-
     //授权框架
     api 'com.hjq:xxpermissions:6.0'
 

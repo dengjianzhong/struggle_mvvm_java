@@ -1,4 +1,4 @@
-package com.struggle.base.bean;
+package com.struggle.base.app.bean;
 
 /**
  * @Author 邓建忠

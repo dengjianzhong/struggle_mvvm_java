@@ -2,13 +2,17 @@ package com.struggle.base.base;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewbinding.ViewBinding;
 
-import com.struggle.base.base.basics.BaseActivity;
-import com.struggle.base.model.IActivityVmModel;
+import com.struggle.base.base.basics.BaseDialog;
 import com.struggle.base.launcher.TxToast;
+import com.struggle.base.model.IDialogVmModel;
 import com.struggle.base.utils.ClassUtil;
 
 import java.lang.reflect.Method;
@@ -17,35 +21,41 @@ import java.lang.reflect.Type;
 
 /**
  * @Author 邓建忠
- * @CreateTime 2021/8/8 15:37
+ * @CreateTime 2021/8/8 22:21
  * @Description TODO
  */
-public abstract class BaseVMActivity<VB extends ViewBinding, VM extends BaseViewModel>
-        extends BaseActivity implements IActivityVmModel {
+public abstract class BaseVMDialog<VB extends ViewBinding, VM extends BaseViewModel>
+        extends BaseDialog implements IDialogVmModel {
 
     protected VM viewModel;
     protected VB bind;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        initBinding();
-        initViewModel();
-        observer();
-
-        super.onCreate(savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return getBindingView();
     }
 
     @Override
-    public void initBinding() {
+    public void onViewCreated(@Nullable View view, @Nullable Bundle savedInstanceState) {
+        initViewModel();
+        observer();
+
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public View getBindingView() {
         Class<VB> vbClass = (Class<VB>) ClassUtil.getParentGeneric(this, 0);
         try {
             Method inflate = vbClass.getDeclaredMethod("inflate", LayoutInflater.class);
             bind = (VB) inflate.invoke(null, getLayoutInflater());
 
-            setContentView(bind.getRoot());
+            return bind.getRoot();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     @Override
@@ -65,10 +75,5 @@ public abstract class BaseVMActivity<VB extends ViewBinding, VM extends BaseView
         viewModel.dialogLiveData.observe(this, aBoolean -> {
 
         });
-    }
-
-    @Override
-    public boolean disableSetView() {
-        return false;
     }
 }

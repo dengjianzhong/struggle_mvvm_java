@@ -3,7 +3,7 @@ package com.struggle.base.base;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.struggle.base.bean.DataResponse;
+import com.struggle.base.app.bean.DataResponse;
 
 /**
  * @Author 邓建忠

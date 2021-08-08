@@ -34,6 +34,7 @@ public abstract class BaseFragment extends Fragment implements IViewModel {
     public void onViewCreated(@Nullable View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //是否开启EventBus事件总线
         if (userEventBus()) {
             EventBus.getDefault().register(this);
         }
