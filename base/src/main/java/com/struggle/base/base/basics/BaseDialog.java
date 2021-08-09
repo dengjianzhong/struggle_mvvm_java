@@ -18,7 +18,8 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.struggle.base.R;
-import com.struggle.base.model.IDialogModel;
+import com.struggle.base.base.model.IDialogModel;
+import com.struggle.base.widgets.loadding.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -31,6 +32,7 @@ public abstract class BaseDialog extends DialogFragment implements IDialogModel 
 
     //获取屏幕参数
     protected DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
+    private LoadingDialog dialog;
 
     @Override
     public int getTheme() {
@@ -115,6 +117,29 @@ public abstract class BaseDialog extends DialogFragment implements IDialogModel 
     }
 
     /**
+     * 显示加载弹窗
+     *
+     * @param mCancelable 设置弹窗是否可以取消
+     * @param content     弹窗提示文本
+     */
+    protected void showLoading(boolean mCancelable, String content) {
+        if (dialog == null) {
+            dialog = new LoadingDialog(getContext(), content);
+        }
+        dialog.setCancelable(mCancelable);
+        dialog.show();
+    }
+
+    /**
+     * 隐藏加载弹窗
+     */
+    protected void hideLoading() {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+    }
+
+    /**
      * 跳转页面
      *
      * @param destinationClass
@@ -145,6 +170,10 @@ public abstract class BaseDialog extends DialogFragment implements IDialogModel 
 
         if (userEventBus()) {
             EventBus.getDefault().unregister(this);
+        }
+        if (dialog != null) {
+            dialog.dismiss();
+            dialog = null;
         }
     }
 }

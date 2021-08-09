@@ -13,7 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.struggle.base.model.IViewModel;
+import com.struggle.base.base.model.IViewModel;
+import com.struggle.base.widgets.loadding.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -23,6 +24,7 @@ import org.greenrobot.eventbus.EventBus;
  * @Description TODO
  */
 public abstract class BaseFragment extends Fragment implements IViewModel {
+    private LoadingDialog dialog;
 
     @Nullable
     @Override
@@ -69,6 +71,29 @@ public abstract class BaseFragment extends Fragment implements IViewModel {
     }
 
     /**
+     * 显示加载弹窗
+     *
+     * @param mCancelable 设置弹窗是否可以取消
+     * @param content     弹窗提示文本
+     */
+    protected void showLoading(boolean mCancelable, String content) {
+        if (dialog == null) {
+            dialog = new LoadingDialog(getContext(), content);
+        }
+        dialog.setCancelable(mCancelable);
+        dialog.show();
+    }
+
+    /**
+     * 隐藏加载弹窗
+     */
+    protected void hideLoading() {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+    }
+
+    /**
      * 跳转页面
      *
      * @param destinationClass
@@ -99,6 +124,10 @@ public abstract class BaseFragment extends Fragment implements IViewModel {
 
         if (userEventBus()) {
             EventBus.getDefault().unregister(this);
+        }
+        if (dialog != null) {
+            dialog.dismiss();
+            dialog = null;
         }
     }
 }

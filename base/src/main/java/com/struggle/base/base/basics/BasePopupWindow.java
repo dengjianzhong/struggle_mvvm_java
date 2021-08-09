@@ -5,11 +5,11 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 
-import com.struggle.base.model.IPopupModel;
+import com.struggle.base.base.model.IPopupModel;
+import com.struggle.base.launcher.UIPix;
 import com.struggle.base.utils.UIUtils;
 
 /**
@@ -26,7 +26,7 @@ public abstract class BasePopupWindow extends PopupWindow implements IPopupModel
 
     public BasePopupWindow(Context context) {
         this.mContext = context;
-        this.dp1 = UIUtils.dip2px(mContext, 1);
+        this.dp1 = UIPix.dip2px(1);
 
         initView();
         initData();

@@ -14,7 +14,6 @@ public class DataResponse<T> {
      */
 
     private int status;
-    private boolean isSuccess;
     private String message;
     private T data;
 
@@ -24,14 +23,6 @@ public class DataResponse<T> {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    public boolean isIsSuccess() {
-        return isSuccess;
-    }
-
-    public void setIsSuccess(boolean isSuccess) {
-        this.isSuccess = isSuccess;
     }
 
     public String getMessage() {

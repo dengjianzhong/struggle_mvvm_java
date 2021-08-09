@@ -1,4 +1,4 @@
-package com.struggle.base.app;
+package com.struggle.base.app.anim;
 
 import com.struggle.base.R;
 

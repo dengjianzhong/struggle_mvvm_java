@@ -1,9 +1,10 @@
-package com.zhong.struggle_mvvm;
+package com.zhong.struggle_mvvm.view;
 
 import android.view.View;
 
-import com.struggle.base.base.BaseVMDialog;
-import com.struggle.base.base.basics.BaseDialog;
+import com.struggle.base.base.vm.BaseVMDialog;
+import com.struggle.base.launcher.TxToast;
+import com.zhong.struggle_mvvm.R;
 import com.zhong.struggle_mvvm.databinding.DialogTestBinding;
 import com.zhong.struggle_mvvm.model.MyModel;
 
@@ -23,7 +24,18 @@ public class MyDialog extends BaseVMDialog<DialogTestBinding, MyModel> {
         bind.textView2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewModel.postNet();
+                viewModel.requestGanHuo();
+            }
+        });
+    }
+
+    @Override
+    public void observer() {
+        super.observer();
+
+        viewModel.ganHuoLiveData.observe(this, testBeans -> {
+            if (testBeans != null && testBeans.size() > 0) {
+                TxToast.showToast("数据请求成功");
             }
         });
     }

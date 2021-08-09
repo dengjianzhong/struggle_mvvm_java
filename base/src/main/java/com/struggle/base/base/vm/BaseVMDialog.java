@@ -1,4 +1,4 @@
-package com.struggle.base.base;
+package com.struggle.base.base.vm;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,17 +7,17 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewbinding.ViewBinding;
 
+import com.struggle.base.app.bean.DataResponse;
 import com.struggle.base.base.basics.BaseDialog;
+import com.struggle.base.base.model.IDialogVmModel;
 import com.struggle.base.launcher.TxToast;
-import com.struggle.base.model.IDialogVmModel;
 import com.struggle.base.utils.ClassUtil;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 
 /**
  * @Author 邓建忠
@@ -39,6 +39,7 @@ public abstract class BaseVMDialog<VB extends ViewBinding, VM extends BaseViewMo
     @Override
     public void onViewCreated(@Nullable View view, @Nullable Bundle savedInstanceState) {
         initViewModel();
+        initLiveData();
         observer();
 
         super.onViewCreated(view, savedInstanceState);
@@ -65,15 +66,19 @@ public abstract class BaseVMDialog<VB extends ViewBinding, VM extends BaseViewMo
     }
 
     @Override
-    public void observer() {
+    public void initLiveData() {
         /**数据获取失败观察者*/
-        viewModel.messageLiveData.observe(this, bean -> {
+        viewModel.messageLiveData.observe(this, (Observer<DataResponse<Object>>) bean -> {
             TxToast.showToast(bean.getMessage());
         });
 
         /**加载弹窗观察者*/
-        viewModel.dialogLiveData.observe(this, aBoolean -> {
-
+        viewModel.dialogLiveData.observe(this, (Observer<Boolean>)b -> {
+            if (b){
+                showLoading(false,"加载中...");
+            }else {
+                hideLoading();
+            }
         });
     }
 }

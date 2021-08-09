@@ -6,50 +6,58 @@ package com.zhong.struggle_mvvm.bean;
  * @Description TODO
  */
 public class TestBean {
+
     /**
-     * code : 500
-     * msg : 用户ID丢失
-     * serviceSuccess : true
-     * data : {}
+     * _id : 5e59ec146d359d60b476e621
+     * coverImageUrl : http://gank.io/images/b9f867a055134a8fa45ef8a321616210
+     * desc : Always deliver more than expected.（Larry Page）
+     * title : Android
+     * type : Android
      */
 
-    private int code;
-    private String msg;
-    private boolean serviceSuccess;
-    private DataBean data;
+    private String _id;
+    private String coverImageUrl;
+    private String desc;
+    private String title;
+    private String type;
 
-    public int getCode() {
-        return code;
+    public String get_id() {
+        return _id;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void set_id(String _id) {
+        this._id = _id;
     }
 
-    public String getMsg() {
-        return msg;
+    public String getCoverImageUrl() {
+        return coverImageUrl;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setCoverImageUrl(String coverImageUrl) {
+        this.coverImageUrl = coverImageUrl;
     }
 
-    public boolean isServiceSuccess() {
-        return serviceSuccess;
+    public String getDesc() {
+        return desc;
     }
 
-    public void setServiceSuccess(boolean serviceSuccess) {
-        this.serviceSuccess = serviceSuccess;
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
-    public DataBean getData() {
-        return data;
+    public String getTitle() {
+        return title;
     }
 
-    public void setData(DataBean data) {
-        this.data = data;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public static class DataBean {
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

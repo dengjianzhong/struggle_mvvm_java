@@ -1,4 +1,4 @@
-package com.struggle.base.model;
+package com.struggle.base.base.model;
 
 /**
  * @Author 邓建忠
@@ -8,7 +8,11 @@ package com.struggle.base.model;
 public interface IActivityVmModel {
     void initViewModel();
 
-    void observer();
+    void initLiveData();
+
+    default void observer(){
+
+    }
 
     void initBinding();
 }

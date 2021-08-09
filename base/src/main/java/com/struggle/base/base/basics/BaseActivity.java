@@ -10,7 +10,8 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.struggle.base.model.IViewModel;
+import com.struggle.base.base.model.IViewModel;
+import com.struggle.base.widgets.loadding.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -20,6 +21,9 @@ import org.greenrobot.eventbus.EventBus;
  * @Description TODO
  */
 public abstract class BaseActivity extends AppCompatActivity implements IViewModel {
+
+    private LoadingDialog dialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +71,29 @@ public abstract class BaseActivity extends AppCompatActivity implements IViewMod
     }
 
     /**
+     * 显示加载弹窗
+     *
+     * @param mCancelable 设置弹窗是否可以取消
+     * @param content     弹窗提示文本
+     */
+    protected void showLoading(boolean mCancelable, String content) {
+        if (dialog == null) {
+            dialog = new LoadingDialog(this, content);
+        }
+        dialog.setCancelable(mCancelable);
+        dialog.show();
+    }
+
+    /**
+     * 隐藏加载弹窗
+     */
+    protected void hideLoading() {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.dismiss();
+        }
+    }
+
+    /**
      * 跳转页面
      *
      * @param destinationClass
@@ -97,6 +124,10 @@ public abstract class BaseActivity extends AppCompatActivity implements IViewMod
 
         if (userEventBus()) {
             EventBus.getDefault().unregister(this);
+        }
+        if (dialog != null) {
+            dialog.dismiss();
+            dialog = null;
         }
     }
 }

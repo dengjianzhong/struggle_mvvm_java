@@ -1,4 +1,4 @@
-package com.struggle.base.model;
+package com.struggle.base.base.model;
 
 import android.view.View;
 
@@ -7,10 +7,14 @@ import android.view.View;
  * @CreateTime 2021/8/8 15:39
  * @Description TODO
  */
-public interface IDialogVmModel {
+public interface IFragmentVmModel {
     void initViewModel();
 
-    void observer();
+    void initLiveData();
+
+    default void observer(){
+
+    }
 
     View getBindingView();
 }

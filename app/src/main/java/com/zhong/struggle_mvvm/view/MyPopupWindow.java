@@ -1,8 +1,9 @@
-package com.zhong.struggle_mvvm;
+package com.zhong.struggle_mvvm.view;
 
 import android.content.Context;
 
 import com.struggle.base.base.basics.BasePopupWindow;
+import com.zhong.struggle_mvvm.R;
 
 /**
  * @Author 邓建忠

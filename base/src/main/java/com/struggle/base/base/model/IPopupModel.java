@@ -1,15 +1,13 @@
-package com.struggle.base.model;
+package com.struggle.base.base.model;
 
 import androidx.annotation.LayoutRes;
-
-import com.struggle.base.app.AnimAction;
 
 /**
  * @Author 邓建忠
  * @CreateTime 2021/8/5 14:06
  * @Description TODO
  */
-public interface IDialogModel {
+public interface IPopupModel {
 
     @LayoutRes
     int getLayoutId();
@@ -23,21 +21,6 @@ public interface IDialogModel {
     default void initEvent() {
     }
 
-    int getWidth();
-
-    int getHeight();
-
-    int getGravity();
-
-    /**
-     * 默认缩放动画
-     *
-     * @return
-     */
-    default int getAnimationStyle() {
-        return AnimAction.ANIM_IOS;
-    }
-
     /**
      * 是否开启EventBus事件总线
      * <p>
@@ -46,4 +29,17 @@ public interface IDialogModel {
     default boolean userEventBus() {
         return false;
     }
+
+    /**
+     * 设置PopupWindow相关参数
+     */
+    int getWindowWidth();
+
+    int getWindowHeight();
+
+    //设置暗影体现出立体
+    int getWindowElevation();
+
+    //设置点击外部是否可以取消
+    boolean isCanTCancel();
 }
