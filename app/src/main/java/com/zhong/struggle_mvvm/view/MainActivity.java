@@ -1,5 +1,6 @@
 package com.zhong.struggle_mvvm.view;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import com.struggle.base.http.observer.SimpleObserver;
 import com.struggle.base.launcher.SPManager;
 import com.struggle.base.launcher.TxToast;
 import com.struggle.base.utils.GsonUtils;
+import com.struggle.base.utils.PermissionsUtil;
 import com.zhong.struggle_mvvm.R;
 import com.zhong.struggle_mvvm.bean.ArticleDetailBean;
 import com.zhong.struggle_mvvm.bean.TestBean;
@@ -72,7 +74,16 @@ public class MainActivity extends BaseVMActivity<ActivityMainBinding, MyModel> {
     @Override
     public void initEvent() {
         bind.tvView.setOnClickListener(v -> {
-            viewModel.requestArticleDetail("5e777432b8ea09cade05263f");
+            List<String> permissions = new ArrayList<>();
+            permissions.add(Manifest.permission.CALL_PHONE);
+            permissions.add(Manifest.permission.CAMERA);
+
+
+            PermissionsUtil.request(MainActivity.this, permissions, b -> {
+                if (b) {
+                    viewModel.requestArticleDetail("5e777432b8ea09cade05263f");
+                }
+            });
         });
     }
 
@@ -108,7 +119,7 @@ public class MainActivity extends BaseVMActivity<ActivityMainBinding, MyModel> {
         });
 
         viewModel.articleDetail.observe(this, articleDetailBean -> {
-            SPManager.Instance().putValue("UserInfo",GsonUtils.toJson(articleDetailBean));
+            SPManager.Instance().putValue("UserInfo", GsonUtils.toJson(articleDetailBean));
             TxToast.showToast("数据请求成功");
         });
     }

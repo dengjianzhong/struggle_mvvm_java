@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zhong.struggle_mvvm">
 
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:name="com.struggle.base.BaseApp"
         android:allowBackup="true"
@@ -11,9 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Struggle_mvvm_java">
+        <activity android:name=".view.MainActivity" />
         <activity
-            android:name=".view.MainActivity" />
-        <activity android:name=".view.SplashActivity"
+            android:name=".view.SplashActivity"
             android:theme="@style/StartTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
