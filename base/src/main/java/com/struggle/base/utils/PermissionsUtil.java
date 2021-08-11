@@ -15,7 +15,9 @@ import java.util.List;
  */
 public class PermissionsUtil {
     public static void request(Activity activity, List<String> permissions, IPermissions iPermissions) {
-        if (!XXPermissions.isHasPermission(activity, permissions)) {
+        if (XXPermissions.isHasPermission(activity, permissions)) {
+            iPermissions.onSuccess(true);
+        } else {
             XXPermissions
                     .with(activity)
                     .permission(permissions)
