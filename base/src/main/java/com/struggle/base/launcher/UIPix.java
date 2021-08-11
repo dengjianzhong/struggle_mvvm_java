@@ -14,6 +14,7 @@ public class UIPix {
 
     /**
      * 初始化UIPix
+     * 注：建议在Application中进行初始化
      *
      * @param context
      */

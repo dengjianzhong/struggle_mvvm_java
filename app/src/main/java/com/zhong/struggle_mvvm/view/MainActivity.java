@@ -13,7 +13,9 @@ import androidx.lifecycle.Observer;
 import com.jaeger.library.StatusBarUtil;
 import com.struggle.base.base.vm.BaseVMActivity;
 import com.struggle.base.http.observer.SimpleObserver;
+import com.struggle.base.launcher.SPManager;
 import com.struggle.base.launcher.TxToast;
+import com.struggle.base.utils.GsonUtils;
 import com.zhong.struggle_mvvm.R;
 import com.zhong.struggle_mvvm.bean.ArticleDetailBean;
 import com.zhong.struggle_mvvm.bean.TestBean;
@@ -106,6 +108,7 @@ public class MainActivity extends BaseVMActivity<ActivityMainBinding, MyModel> {
         });
 
         viewModel.articleDetail.observe(this, articleDetailBean -> {
+            SPManager.Instance().putValue("UserInfo",GsonUtils.toJson(articleDetailBean));
             TxToast.showToast("数据请求成功");
         });
     }
@@ -121,7 +124,6 @@ public class MainActivity extends BaseVMActivity<ActivityMainBinding, MyModel> {
         }
 
         LinkedList<String> linkedList = new LinkedList<>();
-
         Observable.fromIterable(lists)
                 .flatMap((Function<List<String>, ObservableSource<String>>) strings -> Observable.fromIterable(strings))
                 .filter(s -> s.contains("3"))

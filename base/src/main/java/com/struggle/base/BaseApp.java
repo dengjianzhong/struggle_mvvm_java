@@ -3,6 +3,7 @@ package com.struggle.base;
 import android.app.Application;
 
 import com.struggle.base.launcher.IOHandler;
+import com.struggle.base.launcher.SPManager;
 import com.struggle.base.launcher.TxToast;
 import com.struggle.base.launcher.UIPix;
 
@@ -41,5 +42,8 @@ public class BaseApp extends Application {
 
         /**初始化屏幕参数*/
         UIPix.init(this);
+
+        /**初始化SharedPreferences*/
+        SPManager.init(this);
     }
 }

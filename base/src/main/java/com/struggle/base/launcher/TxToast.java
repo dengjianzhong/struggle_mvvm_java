@@ -15,6 +15,7 @@ public class TxToast {
 
     /**
      * 初始化Toast
+     * 注：建议在Application中进行初始化
      *
      * @param context
      */
