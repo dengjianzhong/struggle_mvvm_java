@@ -26,17 +26,11 @@ public class MyFragment extends BaseVMFragment<FragmentTestBinding, MyModel> {
 
     @Override
     public void initEvent() {
-        bind.btTest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MyDialog dialog = new MyDialog();
-                dialog.show(getChildFragmentManager());
+        bind.btTest.setOnClickListener(v -> {
+            /*MyPopupWindow window = new MyPopupWindow(getContext());
+            window.showAsDropDown(v);*/
 
-                /*MyPopupWindow window = new MyPopupWindow(getContext());
-                window.showAsDropDown(v);*/
-
-                viewModel.requestGanHuo();
-            }
+            viewModel.requestGanHuo();
         });
     }
 
@@ -46,7 +40,8 @@ public class MyFragment extends BaseVMFragment<FragmentTestBinding, MyModel> {
 
         viewModel.ganHuoLiveData.observe(this, testBeans -> {
             if (testBeans != null && testBeans.size() > 0) {
-                TxToast.showToast("数据请求成功");
+                MyDialog dialog = new MyDialog();
+                dialog.show(getChildFragmentManager());
             }
         });
     }

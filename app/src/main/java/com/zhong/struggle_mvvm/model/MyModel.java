@@ -3,6 +3,8 @@ package com.zhong.struggle_mvvm.model;
 import androidx.lifecycle.MutableLiveData;
 
 import com.struggle.base.base.vm.BaseViewModel;
+import com.struggle.base.http.observer.OnCompleteListener;
+import com.zhong.struggle_mvvm.bean.ArticleDetailBean;
 import com.zhong.struggle_mvvm.bean.TestBean;
 import com.zhong.struggle_mvvm.http.ApiService;
 
@@ -17,9 +19,26 @@ public class MyModel extends BaseViewModel<ApiService> {
 
     public MutableLiveData<List<TestBean>> ganHuoLiveData = new MutableLiveData<>();
 
+    public MutableLiveData<ArticleDetailBean> articleDetail = new MutableLiveData<>();
+
+    /**
+     * 获取干货所有子分类
+     */
     public void requestGanHuo() {
-        launch(api.postGanHuo(), testBeans -> {
+        launch(api.requestArticle(), testBeans -> {
             ganHuoLiveData.postValue(testBeans);
+        });
+    }
+
+
+    /**
+     * 获取文章详情
+     *
+     * @param id
+     */
+    public void requestArticleDetail(String id) {
+        launch(api.requestArticleDetail(id), articleDetailBean -> {
+            articleDetail.postValue(articleDetailBean);
         });
     }
 }

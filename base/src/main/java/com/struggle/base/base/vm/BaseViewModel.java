@@ -1,8 +1,5 @@
 package com.struggle.base.base.vm;
 
-import android.annotation.SuppressLint;
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -62,6 +59,7 @@ public abstract class BaseViewModel<T> extends ViewModel {
                 .subscribe(new Observer<DataResponse<R>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
+                        //显示加载弹窗
                         dialogLiveData.postValue(true);
                     }
 
@@ -78,13 +76,15 @@ public abstract class BaseViewModel<T> extends ViewModel {
                     public void onError(@NonNull Throwable e) {
                         DataResponse<Object> response = new DataResponse<>();
                         response.setMessage(NetUtil.analyzeException(e));
-
                         messageLiveData.postValue(response);
+
+                        //隐藏加载弹窗
                         dialogLiveData.postValue(false);
                     }
 
                     @Override
                     public void onComplete() {
+                        //隐藏加载弹窗
                         dialogLiveData.postValue(false);
                     }
                 });

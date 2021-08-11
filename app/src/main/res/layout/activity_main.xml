@@ -4,25 +4,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".view.MainActivity">
+
+    <com.struggle.base.widgets.TitleBarView
+        android:id="@+id/tbView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:center_title="架构功能演示"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_5"
         android:layout_marginTop="@dimen/dp_10"
-        android:text="Hello World!"
+        android:background="@color/color_38B3FF"
+        android:gravity="center"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_10"
+        android:paddingRight="@dimen/dp_10"
+        android:paddingBottom="@dimen/dp_10"
+        android:text="模拟网络请求"
+        android:textColor="@color/color_FFFFFF"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tbView" />
+
+    <Button
+        android:id="@+id/bt1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RxJava"
+        android:onClick="onClick"
+        app:layout_constraintLeft_toLeftOf="@id/tvView"
+        app:layout_constraintTop_toBottomOf="@+id/tvView"/>
 
     <FrameLayout
         android:id="@+id/flContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/dp_10"
+        android:layout_marginTop="@dimen/dp_5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvView" />
+        app:layout_constraintTop_toBottomOf="@+id/bt1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
