@@ -125,28 +125,32 @@ public class MainActivity extends BaseVMActivity<ActivityMainBinding, MyModel> {
     }
 
     public void onClick(View view) {
-        List<List<String>> lists = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            List<String> childList = new ArrayList<>();
-            for (int j = 0; j < 10; j++) {
-                childList.add(i + "-" + j);
+        if (view.getId() == R.id.bt1) {
+            List<List<String>> lists = new ArrayList<>();
+            for (int i = 0; i < 10; i++) {
+                List<String> childList = new ArrayList<>();
+                for (int j = 0; j < 10; j++) {
+                    childList.add(i + "-" + j);
+                }
+                lists.add(childList);
             }
-            lists.add(childList);
-        }
 
-        LinkedList<String> linkedList = new LinkedList<>();
-        Observable.fromIterable(lists)
-                .flatMap((Function<List<String>, ObservableSource<String>>) strings -> Observable.fromIterable(strings))
-                .filter(s -> s.contains("3"))
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .subscribe(s -> linkedList.add(s)
-                        , throwable -> Log.i("===>", throwable.getMessage())
-                        , () -> {
-                            if (linkedList != null) {
-                                Log.i("==>", "完成");
-                            }
-                        });
+            LinkedList<String> linkedList = new LinkedList<>();
+            Observable.fromIterable(lists)
+                    .flatMap((Function<List<String>, ObservableSource<String>>) strings -> Observable.fromIterable(strings))
+                    .filter(s -> s.contains("3"))
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .unsubscribeOn(Schedulers.io())
+                    .subscribe(s -> linkedList.add(s)
+                            , throwable -> Log.i("===>", throwable.getMessage())
+                            , () -> {
+                                if (linkedList != null) {
+                                    Log.i("==>", "完成");
+                                }
+                            });
+        } else {
+            openActivity(TestActivity.class, null);
+        }
     }
 }

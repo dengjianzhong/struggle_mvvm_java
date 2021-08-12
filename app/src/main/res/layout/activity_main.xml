@@ -40,6 +40,15 @@
         app:layout_constraintLeft_toLeftOf="@id/tvView"
         app:layout_constraintTop_toBottomOf="@+id/tvView"/>
 
+    <Button
+        android:id="@+id/bt2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳转页面"
+        android:onClick="onClick"
+        app:layout_constraintLeft_toLeftOf="@id/tvView"
+        app:layout_constraintTop_toBottomOf="@+id/bt1"/>
+
     <FrameLayout
         android:id="@+id/flContainer"
         android:layout_width="0dp"
@@ -48,5 +57,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt1" />
+        app:layout_constraintTop_toBottomOf="@+id/bt2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

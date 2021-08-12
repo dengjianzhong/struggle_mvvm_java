@@ -1,6 +1,7 @@
 package com.struggle.base.widgets.loadding;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -53,6 +54,13 @@ public class LoadingDialog extends AppCompatDialog implements IMessageLoader {
         mLoadingView = findViewById(contentView.LOADING_ID);
 
         updateMessage(tipMessage);
+        initEvent();
+    }
+
+    private void initEvent() {
+        setOnCancelListener(dialog -> {
+            dismiss();
+        });
     }
 
     /**

@@ -1,6 +1,7 @@
 package com.struggle.base.base.basics;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -162,6 +163,13 @@ public abstract class BaseDialog extends DialogFragment implements IDialogModel 
         Intent intent = new Intent(getContext(), destinationClass);
         if (options != null) intent.putExtras(options);
         startActivityForResult(intent, requestCode);
+    }
+
+    @Override
+    public void onCancel(@NonNull DialogInterface dialog) {
+        super.onCancel(dialog);
+
+        dismiss();
     }
 
     @Override
