@@ -81,9 +81,4 @@ public abstract class BaseVMFragment<VB extends ViewBinding, VM extends BaseView
             }
         });
     }
-
-    @Override
-    public boolean disableSetView() {
-        return false;
-    }
 }

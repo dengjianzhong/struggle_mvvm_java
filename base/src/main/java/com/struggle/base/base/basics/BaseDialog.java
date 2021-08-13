@@ -98,7 +98,7 @@ public abstract class BaseDialog extends DialogFragment implements IDialogModel 
      * 点击外部隐藏软键盘，提升用户体验
      */
     protected void initSoftKeyboard() {
-        getActivity().findViewById(Window.ID_ANDROID_CONTENT).setOnClickListener(v -> hideSoftKeyboard());
+        getDialog().getWindow().findViewById(Window.ID_ANDROID_CONTENT).setOnClickListener(v -> hideSoftKeyboard());
     }
 
     /**
@@ -136,7 +136,7 @@ public abstract class BaseDialog extends DialogFragment implements IDialogModel 
      */
     protected void hideLoading() {
         if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
+            dialog.cancel();
         }
     }
 
@@ -166,21 +166,18 @@ public abstract class BaseDialog extends DialogFragment implements IDialogModel 
     }
 
     @Override
-    public void onCancel(@NonNull DialogInterface dialog) {
-        super.onCancel(dialog);
-
-        dismiss();
-    }
-
-    @Override
     public void onDestroy() {
         super.onDestroy();
 
         if (userEventBus()) {
             EventBus.getDefault().unregister(this);
         }
+
+        //必要做法，防止内存泄漏
         if (dialog != null) {
-            dialog.dismiss();
+            dialog.setOnCancelListener(null);
+            dialog.setOnDismissListener(null);
+            dialog.setOnShowListener(null);
             dialog = null;
         }
     }

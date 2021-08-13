@@ -54,13 +54,6 @@ public class LoadingDialog extends AppCompatDialog implements IMessageLoader {
         mLoadingView = findViewById(contentView.LOADING_ID);
 
         updateMessage(tipMessage);
-        initEvent();
-    }
-
-    private void initEvent() {
-        setOnCancelListener(dialog -> {
-            dismiss();
-        });
     }
 
     /**

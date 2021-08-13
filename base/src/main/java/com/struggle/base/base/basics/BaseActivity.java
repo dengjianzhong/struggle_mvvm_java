@@ -28,7 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IViewMod
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //是否禁用设置Activity setContentView
+        //是否禁用setContentView，由于跟DataBinding存在冲突故此做法
         if (disableSetView()) {
             setContentView(getLayoutId());
         }
@@ -45,6 +45,15 @@ public abstract class BaseActivity extends AppCompatActivity implements IViewMod
         initData();
         initEvent();
         initSoftKeyboard();
+    }
+
+    /**
+     * 禁用设置Activity setContentView
+     * <p>
+     * true 默认开启
+     */
+    public boolean disableSetView() {
+        return true;
     }
 
     /**
@@ -89,7 +98,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IViewMod
      */
     protected void hideLoading() {
         if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
+            dialog.cancel();
         }
     }
 
@@ -125,8 +134,11 @@ public abstract class BaseActivity extends AppCompatActivity implements IViewMod
         if (userEventBus()) {
             EventBus.getDefault().unregister(this);
         }
+        //必要做法，防止内存泄漏
         if (dialog != null) {
-            dialog.dismiss();
+            dialog.setOnCancelListener(null);
+            dialog.setOnDismissListener(null);
+            dialog.setOnShowListener(null);
             dialog = null;
         }
     }

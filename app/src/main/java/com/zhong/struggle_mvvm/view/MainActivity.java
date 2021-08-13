@@ -79,11 +79,7 @@ public class MainActivity extends BaseVMActivity<ActivityMainBinding, MyModel> {
             permissions.add(Manifest.permission.CAMERA);
 
 
-            PermissionsUtil.request(MainActivity.this, permissions, b -> {
-                if (b) {
-                    viewModel.requestArticleDetail("5e777432b8ea09cade05263f");
-                }
-            });
+            viewModel.requestArticleDetail("5e777432b8ea09cade05263f");
         });
     }
 

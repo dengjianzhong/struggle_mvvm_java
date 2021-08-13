@@ -38,13 +38,4 @@ public interface IViewModel {
     default boolean disableHorizontalScreen() {
         return true;
     }
-
-    /**
-     * 禁用设置Activity setContentView
-     * <p>
-     * true 默认开启
-     */
-    default boolean disableSetView() {
-        return true;
-    }
 }

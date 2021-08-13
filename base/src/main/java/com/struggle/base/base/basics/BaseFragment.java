@@ -44,16 +44,6 @@ public abstract class BaseFragment extends Fragment implements IViewModel {
         initView();
         initData();
         initEvent();
-        initSoftKeyboard();
-    }
-
-    /**
-     * 初始化软键盘
-     * <p>
-     * 点击外部隐藏软键盘，提升用户体验
-     */
-    protected void initSoftKeyboard() {
-        getActivity().findViewById(Window.ID_ANDROID_CONTENT).setOnClickListener(v -> hideSoftKeyboard());
     }
 
     /**
@@ -89,7 +79,7 @@ public abstract class BaseFragment extends Fragment implements IViewModel {
      */
     protected void hideLoading() {
         if (dialog != null && dialog.isShowing()) {
-            dialog.dismiss();
+            dialog.cancel();
         }
     }
 
@@ -125,8 +115,12 @@ public abstract class BaseFragment extends Fragment implements IViewModel {
         if (userEventBus()) {
             EventBus.getDefault().unregister(this);
         }
+
+        //必要做法，防止内存泄漏
         if (dialog != null) {
-            dialog.dismiss();
+            dialog.setOnCancelListener(null);
+            dialog.setOnDismissListener(null);
+            dialog.setOnShowListener(null);
             dialog = null;
         }
     }

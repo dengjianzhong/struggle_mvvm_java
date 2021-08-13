@@ -73,10 +73,10 @@ public abstract class BaseVMDialog<VB extends ViewBinding, VM extends BaseViewMo
         });
 
         /**加载弹窗观察者*/
-        viewModel.dialogLiveData.observe(this, (Observer<Boolean>)b -> {
-            if (b){
-                showLoading(false,"加载中...");
-            }else {
+        viewModel.dialogLiveData.observe(this, (Observer<Boolean>) b -> {
+            if (b) {
+                showLoading(false, "加载中...");
+            } else {
                 hideLoading();
             }
         });

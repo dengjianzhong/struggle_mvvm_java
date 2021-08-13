@@ -72,6 +72,7 @@ public abstract class BaseVMActivity<VB extends ViewBinding, VM extends BaseView
         });
     }
 
+    /**是否禁用setContentView，由于跟DataBinding存在冲突故此做法*/
     @Override
     public boolean disableSetView() {
         return false;
