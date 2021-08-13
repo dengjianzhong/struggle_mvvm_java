@@ -2,7 +2,7 @@ package com.zhong.struggle_mvvm.view;
 
 import android.view.View;
 
-import com.struggle.base.base.vm.BaseVMDialog;
+import com.struggle.base.base.mvvm.BaseVMDialog;
 import com.struggle.base.launcher.TxToast;
 import com.zhong.struggle_mvvm.R;
 import com.zhong.struggle_mvvm.databinding.DialogTestBinding;

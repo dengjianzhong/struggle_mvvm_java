@@ -1,4 +1,4 @@
-package com.struggle.base.base.vm;
+package com.struggle.base.base.mvvm;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -68,12 +68,12 @@ public abstract class BaseVMDialog<VB extends ViewBinding, VM extends BaseViewMo
     @Override
     public void initLiveData() {
         /**数据获取失败观察者*/
-        viewModel.messageLiveData.observe(this, (Observer<DataResponse<Object>>) bean -> {
+        viewModel.rep.messageLiveData.observe(this, (Observer<DataResponse<Object>>) bean -> {
             TxToast.showToast(bean.getMessage());
         });
 
         /**加载弹窗观察者*/
-        viewModel.dialogLiveData.observe(this, (Observer<Boolean>) b -> {
+        viewModel.rep.dialogLiveData.observe(this, (Observer<Boolean>) b -> {
             if (b) {
                 showLoading(false, "加载中...");
             } else {

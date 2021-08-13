@@ -1,12 +1,11 @@
-package com.struggle.base.base.vm;
+package com.struggle.base.base.mvvm;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.struggle.base.app.bean.DataResponse;
 import com.struggle.base.http.GoHttp;
-import com.struggle.base.http.observer.OnCompleteListener;
+import com.struggle.base.http.observer.OnSubscribeListener;
 import com.struggle.base.utils.ClassUtil;
 import com.struggle.base.utils.NetUtil;
 
@@ -18,10 +17,11 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * @Author 邓建忠
- * @CreateTime 2021/8/8 15:18
+ * @CreateTime 2021/8/13 14:40
  * @Description TODO
  */
-public abstract class BaseViewModel<T> extends ViewModel {
+public abstract class BaseRepository<T> {
+
     /**
      * 加载错误相关信息
      */
@@ -39,7 +39,6 @@ public abstract class BaseViewModel<T> extends ViewModel {
      * 创建API请求对象
      */
     protected T api;
-
     {
         Class<T> apiClass = (Class<T>) ClassUtil.getParentGeneric(this, 0);
         api = GoHttp.Instance().create(apiClass);
@@ -52,15 +51,32 @@ public abstract class BaseViewModel<T> extends ViewModel {
      * @param observable
      * @param listener
      */
-    protected <R> void launch(Observable<DataResponse<R>> observable, OnCompleteListener<R> listener) {
+    protected <R> void launch(Observable<DataResponse<R>> observable,
+                              OnSubscribeListener<R> listener) {
+        launch(observable, true, listener);
+    }
+
+    /**
+     * 开始请求网络
+     *
+     * @param <R>
+     * @param observable
+     * @param listener
+     * @param useLoading 是否显示加载弹窗
+     */
+    protected <R> void launch(Observable<DataResponse<R>> observable,
+                              boolean useLoading,
+                              OnSubscribeListener<R> listener) {
+
         observable.subscribeOn(Schedulers.io())
                 .unsubscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<DataResponse<R>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-                        //显示加载弹窗
-                        dialogLiveData.postValue(true);
+                        if (useLoading) {
+                            dialogLiveData.postValue(true);//显示加载弹窗
+                        }
                     }
 
                     @Override
@@ -69,6 +85,7 @@ public abstract class BaseViewModel<T> extends ViewModel {
                             listener.onSuccess(response.getData());
                             return;
                         }
+
                         messageLiveData.postValue((DataResponse<Object>) response);
                     }
 
@@ -76,18 +93,20 @@ public abstract class BaseViewModel<T> extends ViewModel {
                     public void onError(@NonNull Throwable e) {
                         DataResponse<Object> response = new DataResponse<>();
                         response.setMessage(NetUtil.analyzeException(e));
-                        messageLiveData.postValue(response);
 
-                        //隐藏加载弹窗
-                        dialogLiveData.postValue(false);
+                        listener.onError(response);
+                        messageLiveData.postValue(response);
+                        if (useLoading) {
+                            dialogLiveData.postValue(false);//隐藏加载弹窗
+                        }
                     }
 
                     @Override
                     public void onComplete() {
-                        //隐藏加载弹窗
-                        dialogLiveData.postValue(false);
+                        if (useLoading) {
+                            dialogLiveData.postValue(false);//隐藏加载弹窗
+                        }
                     }
                 });
     }
 }
-

@@ -2,11 +2,8 @@ package com.zhong.struggle_mvvm.view;
 
 import android.view.View;
 
-import com.struggle.base.base.basics.BaseActivity;
-import com.struggle.base.base.vm.BaseVMActivity;
-import com.struggle.base.launcher.SPManager;
+import com.struggle.base.base.mvvm.BaseVMActivity;
 import com.struggle.base.launcher.TxToast;
-import com.struggle.base.utils.GsonUtils;
 import com.zhong.struggle_mvvm.R;
 import com.zhong.struggle_mvvm.databinding.ActivityTestBinding;
 import com.zhong.struggle_mvvm.model.MyModel;
