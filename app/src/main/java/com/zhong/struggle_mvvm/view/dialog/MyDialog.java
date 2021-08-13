@@ -1,6 +1,4 @@
-package com.zhong.struggle_mvvm.view;
-
-import android.view.View;
+package com.zhong.struggle_mvvm.view.dialog;
 
 import com.struggle.base.base.mvvm.BaseVMDialog;
 import com.struggle.base.launcher.TxToast;
@@ -21,12 +19,7 @@ public class MyDialog extends BaseVMDialog<DialogTestBinding, MyModel> {
 
     @Override
     public void initEvent() {
-        bind.textView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                viewModel.requestGanHuo();
-            }
-        });
+        bind.textView2.setOnClickListener(v -> viewModel.requestGanHuo());
     }
 
     @Override

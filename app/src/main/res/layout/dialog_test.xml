@@ -7,11 +7,11 @@
     android:paddingTop="@dimen/dp_60"
     android:paddingBottom="@dimen/dp_60">
 
-    <TextView
+    <Button
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="测试弹窗"
+        android:text="模拟网络请求"
         android:textColor="@color/color_FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

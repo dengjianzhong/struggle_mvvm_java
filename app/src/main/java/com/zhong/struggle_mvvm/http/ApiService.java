@@ -2,6 +2,7 @@ package com.zhong.struggle_mvvm.http;
 
 import com.struggle.base.app.bean.DataResponse;
 import com.zhong.struggle_mvvm.bean.ArticleDetailBean;
+import com.zhong.struggle_mvvm.bean.ClassifyBean;
 import com.zhong.struggle_mvvm.bean.TestBean;
 
 import java.util.List;
@@ -21,4 +22,7 @@ public interface ApiService {
 
     @GET("post/{id}")
     Observable<DataResponse<ArticleDetailBean>> requestArticleDetail(@Path("id") String id);
+
+    @GET("categories/Girl")
+    Observable<DataResponse<List<ClassifyBean>>> requestGirl();
 }

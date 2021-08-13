@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.jaeger.library.StatusBarUtil;
 import com.struggle.base.base.model.IViewModel;
 import com.struggle.base.widgets.loadding.LoadingDialog;
 
@@ -100,6 +101,14 @@ public abstract class BaseActivity extends AppCompatActivity implements IViewMod
         if (dialog != null && dialog.isShowing()) {
             dialog.cancel();
         }
+    }
+
+    /**
+     * 设置透明状态栏
+     */
+    protected void setTransparentStatusBar(){
+        StatusBarUtil.setTransparent(this);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
     }
 
     /**

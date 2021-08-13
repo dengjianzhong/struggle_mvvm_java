@@ -1,9 +1,10 @@
-package com.zhong.struggle_mvvm.view;
+package com.zhong.struggle_mvvm.view.fragment;
 
 import com.struggle.base.base.mvvm.BaseVMFragment;
 import com.zhong.struggle_mvvm.R;
 import com.zhong.struggle_mvvm.databinding.FragmentTestBinding;
 import com.zhong.struggle_mvvm.model.MyModel;
+import com.zhong.struggle_mvvm.view.dialog.MyDialog;
 
 /**
  * @Author 邓建忠
@@ -18,12 +19,7 @@ public class MyFragment extends BaseVMFragment<FragmentTestBinding, MyModel> {
 
     @Override
     public void initEvent() {
-        bind.btTest.setOnClickListener(v -> {
-            /*MyPopupWindow window = new MyPopupWindow(getContext());
-            window.showAsDropDown(v);*/
-
-            viewModel.requestGanHuo();
-        });
+        bind.btTest.setOnClickListener(v -> viewModel.requestGanHuo());
     }
 
     @Override

@@ -1,6 +1,5 @@
-package com.zhong.struggle_mvvm.view;
+package com.zhong.struggle_mvvm.view.activity;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,14 +8,14 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.jaeger.library.StatusBarUtil;
 import com.struggle.base.base.mvvm.BaseVMActivity;
 import com.struggle.base.http.observer.SimpleObserver;
 import com.struggle.base.launcher.TxToast;
 import com.zhong.struggle_mvvm.R;
 import com.zhong.struggle_mvvm.bean.TestBean;
-import com.zhong.struggle_mvvm.databinding.ActivityMainBinding;
+import com.zhong.struggle_mvvm.databinding.ActivityFramework1Binding;
 import com.zhong.struggle_mvvm.model.MyModel;
+import com.zhong.struggle_mvvm.view.fragment.MyFragment;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -28,22 +27,19 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainActivity extends BaseVMActivity<ActivityMainBinding, MyModel> {
+/**
+ * @Author 邓建忠
+ * @CreateTime 2021/8/6 17:39
+ * @Description 架构功能演示(1)
+ */
+public class FrameworkActivity1 extends BaseVMActivity<ActivityFramework1Binding, MyModel> {
     @Override
     public int getLayoutId() {
-        return R.layout.activity_main;
+        return R.layout.activity_framework1;
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        StatusBarUtil.setTransparent(this);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-
-        super.onCreate(savedInstanceState);
-    }
-
     @Override
     public void initView() {
+        setTransparentStatusBar();
         {
             FragmentTransaction transaction =
                     getSupportFragmentManager().beginTransaction();
@@ -59,14 +55,7 @@ public class MainActivity extends BaseVMActivity<ActivityMainBinding, MyModel> {
 
     @Override
     public void initEvent() {
-        bind.tvView.setOnClickListener(v -> {
-            List<String> permissions = new ArrayList<>();
-            permissions.add(Manifest.permission.CALL_PHONE);
-            permissions.add(Manifest.permission.CAMERA);
-
-
-            viewModel.requestArticleDetail("5e777432b8ea09cade05263f");
-        });
+        bind.tvView.setOnClickListener(v -> viewModel.requestGirl());
     }
 
     @SuppressLint("CheckResult")
@@ -74,6 +63,7 @@ public class MainActivity extends BaseVMActivity<ActivityMainBinding, MyModel> {
     public void observer() {
         super.observer();
 
+        /**干货所有子分类*/
         viewModel.ganHuoLiveData.observe(this, testBeans -> {
             List<TestBean> testBeanList = new ArrayList<>();
             if (testBeans != null && testBeans.size() > 0) {
@@ -98,42 +88,55 @@ public class MainActivity extends BaseVMActivity<ActivityMainBinding, MyModel> {
             }
         });
 
-        viewModel.articleDetail.observe(this, articleDetailBean -> {
-            TxToast.showToast("数据请求成功");
-        });
+        /**文章详情*/
+        viewModel.articleDetail.observe(this, articleDetailBean -> TxToast.showToast("数据请求成功"));
+
+        /**分类*/
+        viewModel.classify.observe(this, articleDetailBean -> TxToast.showToast("分类请求成功"));
     }
 
 
     @SuppressLint("CheckResult")
     public void onClick(View view) {
-        if (view.getId() == R.id.bt1) {
-            /**Rxjava*/
-            List<List<String>> lists = new ArrayList<>();
-            for (int i = 0; i < 10; i++) {
-                List<String> childList = new ArrayList<>();
-                for (int j = 0; j < 10; j++) {
-                    childList.add(i + "-" + j);
-                }
-                lists.add(childList);
-            }
-
-            LinkedList<String> linkedList = new LinkedList<>();
-            Observable.fromIterable(lists)
-                    .flatMap((Function<List<String>, ObservableSource<String>>) strings -> Observable.fromIterable(strings))
-                    .filter(s -> s.contains("3"))
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .unsubscribeOn(Schedulers.io())
-                    .subscribe(s -> linkedList.add(s)
-                            , throwable -> Log.i("===>", throwable.getMessage())
-                            , () -> {
-                                if (linkedList != null) {
-                                    Log.i("==>", "完成");
-                                }
-                            });
-        } else {
-            /**跳转页面*/
-            openActivity(TestActivity.class, null);
+        switch (view.getId()) {
+            case R.id.bt1:
+                /**Rxjava数据模拟*/
+                LinkedList<String> linkedList = new LinkedList<>();
+                Observable.fromIterable(getSourceData())
+                        .flatMap((Function<List<String>, ObservableSource<String>>) strings -> Observable.fromIterable(strings))
+                        .filter(s -> s.contains("3"))
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .unsubscribeOn(Schedulers.io())
+                        .subscribe(s -> linkedList.add(s)
+                                , throwable -> Log.i("===>", throwable.getMessage())
+                                , () -> {
+                                    if (linkedList != null) {
+                                        TxToast.showToast("数据处理成功");
+                                    }
+                                });
+                break;
+            default:
+                /**跳转页面*/
+                openActivity(FrameworkActivity2.class, null);
+                break;
         }
+    }
+
+    /**
+     * 获取数据源
+     * @return
+     */
+    private List<List<String>> getSourceData() {
+        List<List<String>> lists = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            List<String> childList = new ArrayList<>();
+            for (int j = 0; j < 10; j++) {
+                childList.add(i + "-" + j);
+            }
+            lists.add(childList);
+        }
+
+        return lists;
     }
 }

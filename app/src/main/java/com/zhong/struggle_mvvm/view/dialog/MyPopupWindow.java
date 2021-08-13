@@ -1,4 +1,4 @@
-package com.zhong.struggle_mvvm.view;
+package com.zhong.struggle_mvvm.view.dialog;
 
 import android.content.Context;
 

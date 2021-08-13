@@ -8,9 +8,17 @@
         android:id="@+id/btTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="测试dialog"
         android:layout_marginLeft="@dimen/dp_5"
         android:layout_marginTop="@dimen/dp_10"
+        android:text="测试dialog弹窗"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/sp_11"
+        android:text="注：只有当网络数据请求成功时才会拉起弹窗"
+        app:layout_constraintLeft_toLeftOf="@+id/btTest"
+        app:layout_constraintTop_toBottomOf="@+id/btTest" />
 </androidx.constraintlayout.widget.ConstraintLayout>

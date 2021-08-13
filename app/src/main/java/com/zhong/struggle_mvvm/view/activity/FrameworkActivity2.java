@@ -1,18 +1,29 @@
-package com.zhong.struggle_mvvm.view;
+package com.zhong.struggle_mvvm.view.activity;
 
 import android.view.View;
 
 import com.struggle.base.base.mvvm.BaseVMActivity;
 import com.struggle.base.launcher.TxToast;
 import com.zhong.struggle_mvvm.R;
-import com.zhong.struggle_mvvm.databinding.ActivityTestBinding;
+import com.zhong.struggle_mvvm.databinding.ActivityFramework2Binding;
 import com.zhong.struggle_mvvm.model.MyModel;
+import com.zhong.struggle_mvvm.view.dialog.MyDialog;
 
-public class TestActivity extends BaseVMActivity<ActivityTestBinding, MyModel> {
+/**
+ * @Author 邓建忠
+ * @CreateTime 2021/8/6 17:39
+ * @Description 架构功能演示(2)
+ */
+public class FrameworkActivity2 extends BaseVMActivity<ActivityFramework2Binding, MyModel> {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_test;
+        return R.layout.activity_framework2;
+    }
+
+    @Override
+    public void initView() {
+        setTransparentStatusBar();
     }
 
     public void onClick(View view) {

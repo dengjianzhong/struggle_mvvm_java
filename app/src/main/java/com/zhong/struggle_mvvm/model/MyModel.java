@@ -3,7 +3,9 @@ package com.zhong.struggle_mvvm.model;
 import androidx.lifecycle.MutableLiveData;
 
 import com.struggle.base.base.mvvm.BaseViewModel;
+import com.struggle.base.http.observer.OnSubscribeListener;
 import com.zhong.struggle_mvvm.bean.ArticleDetailBean;
+import com.zhong.struggle_mvvm.bean.ClassifyBean;
 import com.zhong.struggle_mvvm.bean.TestBean;
 import com.zhong.struggle_mvvm.repository.MyRepository;
 
@@ -22,6 +24,9 @@ public class MyModel extends BaseViewModel<MyRepository> {
     //文章详情
     public MutableLiveData<ArticleDetailBean> articleDetail = new MutableLiveData<>();
 
+    //分类
+    public MutableLiveData<List<ClassifyBean>> classify = new MutableLiveData<>();
+
     /**
      * 获取干货所有子分类
      */
@@ -37,5 +42,12 @@ public class MyModel extends BaseViewModel<MyRepository> {
      */
     public void requestArticleDetail(String id) {
         rep.requestArticleDetail(id, articleDetailBean -> articleDetail.setValue(articleDetailBean));
+    }
+
+    /**
+     * 获取分类
+     */
+    public void requestGirl() {
+        rep.requestGirl(classifyBeans -> classify.setValue(classifyBeans));
     }
 }

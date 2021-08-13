@@ -14,10 +14,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Struggle_mvvm_java">
-        <activity android:name=".view.TestActivity"></activity>
-        <activity android:name=".view.MainActivity" />
+        <activity android:name=".view.activity.FrameworkActivity2"></activity>
+        <activity android:name=".view.activity.FrameworkActivity1" />
         <activity
-            android:name=".view.SplashActivity"
+            android:name=".view.activity.SplashActivity"
             android:theme="@style/StartTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
