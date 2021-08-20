@@ -1,13 +1,11 @@
 package com.struggle.base.base.model;
 
-import android.view.View;
-
 /**
  * @Author 邓建忠
  * @CreateTime 2021/8/8 15:39
  * @Description TODO
  */
-public interface IDialogVmModel {
+public interface ActivityVmModule {
     void initViewModel();
 
     void initLiveData();
@@ -16,5 +14,5 @@ public interface IDialogVmModel {
 
     }
 
-    View getBindingView();
+    void initBinding();
 }

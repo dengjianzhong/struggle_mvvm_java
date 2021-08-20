@@ -6,14 +6,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.struggle.base.base.model.IViewModel;
+import com.struggle.base.base.model.ViewModule;
 import com.struggle.base.widgets.loadding.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -23,7 +22,7 @@ import org.greenrobot.eventbus.EventBus;
  * @CreateTime 2021/8/5 11:47
  * @Description TODO
  */
-public abstract class BaseFragment extends Fragment implements IViewModel {
+public abstract class BaseFragment extends Fragment implements ViewModule {
     private LoadingDialog dialog;
 
     @Nullable

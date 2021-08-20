@@ -7,7 +7,7 @@ import androidx.annotation.LayoutRes;
  * @CreateTime 2021/8/5 14:06
  * @Description TODO
  */
-public interface IPopupModel {
+public interface PopupModule {
 
     @LayoutRes
     int getLayoutId();

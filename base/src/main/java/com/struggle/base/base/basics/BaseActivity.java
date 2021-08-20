@@ -11,7 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jaeger.library.StatusBarUtil;
-import com.struggle.base.base.model.IViewModel;
+import com.struggle.base.base.model.ViewModule;
 import com.struggle.base.widgets.loadding.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -21,7 +21,7 @@ import org.greenrobot.eventbus.EventBus;
  * @CreateTime 2021/8/5 11:47
  * @Description TODO
  */
-public abstract class BaseActivity extends AppCompatActivity implements IViewModel {
+public abstract class BaseActivity extends AppCompatActivity implements ViewModule {
 
     private LoadingDialog dialog;
 

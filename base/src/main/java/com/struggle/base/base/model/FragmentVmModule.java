@@ -7,7 +7,7 @@ import android.view.View;
  * @CreateTime 2021/8/8 15:39
  * @Description TODO
  */
-public interface IFragmentVmModel {
+public interface FragmentVmModule {
     void initViewModel();
 
     void initLiveData();

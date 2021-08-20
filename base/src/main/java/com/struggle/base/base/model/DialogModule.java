@@ -9,7 +9,7 @@ import com.struggle.base.app.anim.AnimAction;
  * @CreateTime 2021/8/5 14:06
  * @Description TODO
  */
-public interface IDialogModel {
+public interface DialogModule {
 
     @LayoutRes
     int getLayoutId();

@@ -13,7 +13,7 @@ import androidx.viewbinding.ViewBinding;
 
 import com.struggle.base.app.bean.DataResponse;
 import com.struggle.base.base.basics.BaseFragment;
-import com.struggle.base.base.model.IFragmentVmModel;
+import com.struggle.base.base.model.FragmentVmModule;
 import com.struggle.base.launcher.TxToast;
 import com.struggle.base.utils.ClassUtil;
 
@@ -25,7 +25,7 @@ import java.lang.reflect.Method;
  * @Description TODO
  */
 public abstract class BaseVMFragment<VB extends ViewBinding, VM extends BaseViewModel>
-        extends BaseFragment implements IFragmentVmModel {
+        extends BaseFragment implements FragmentVmModule {
 
     protected VM viewModel;
     protected VB bind;

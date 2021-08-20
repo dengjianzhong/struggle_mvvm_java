@@ -1,7 +1,6 @@
 package com.struggle.base.base.basics;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -19,7 +18,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.struggle.base.R;
-import com.struggle.base.base.model.IDialogModel;
+import com.struggle.base.base.model.DialogModule;
 import com.struggle.base.widgets.loadding.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -29,7 +28,7 @@ import org.greenrobot.eventbus.EventBus;
  * @CreateTime 2021/8/5 11:47
  * @Description TODO
  */
-public abstract class BaseDialog extends DialogFragment implements IDialogModel {
+public abstract class BaseDialog extends DialogFragment implements DialogModule {
 
     //获取屏幕参数
     protected DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();

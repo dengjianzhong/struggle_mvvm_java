@@ -9,7 +9,7 @@ import androidx.viewbinding.ViewBinding;
 
 import com.struggle.base.app.bean.DataResponse;
 import com.struggle.base.base.basics.BaseActivity;
-import com.struggle.base.base.model.IActivityVmModel;
+import com.struggle.base.base.model.ActivityVmModule;
 import com.struggle.base.launcher.TxToast;
 import com.struggle.base.utils.ClassUtil;
 
@@ -21,7 +21,7 @@ import java.lang.reflect.Method;
  * @Description TODO
  */
 public abstract class BaseVMActivity<VB extends ViewBinding, VM extends BaseViewModel>
-        extends BaseActivity implements IActivityVmModel {
+        extends BaseActivity implements ActivityVmModule {
 
     protected VM viewModel;
     protected VB bind;

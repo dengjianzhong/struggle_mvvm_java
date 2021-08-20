@@ -13,7 +13,7 @@ import androidx.viewbinding.ViewBinding;
 
 import com.struggle.base.app.bean.DataResponse;
 import com.struggle.base.base.basics.BaseDialog;
-import com.struggle.base.base.model.IDialogVmModel;
+import com.struggle.base.base.model.DialogVmModule;
 import com.struggle.base.launcher.TxToast;
 import com.struggle.base.utils.ClassUtil;
 
@@ -25,7 +25,7 @@ import java.lang.reflect.Method;
  * @Description TODO
  */
 public abstract class BaseVMDialog<VB extends ViewBinding, VM extends BaseViewModel>
-        extends BaseDialog implements IDialogVmModel {
+        extends BaseDialog implements DialogVmModule {
 
     protected VM viewModel;
     protected VB bind;

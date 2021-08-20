@@ -8,16 +8,15 @@ import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 
-import com.struggle.base.base.model.IPopupModel;
+import com.struggle.base.base.model.PopupModule;
 import com.struggle.base.launcher.UIPix;
-import com.struggle.base.utils.UIUtils;
 
 /**
  * @Author 邓建忠
  * @CreateTime 2021/8/6 17:45
  * @Description TODO
  */
-public abstract class BasePopupWindow extends PopupWindow implements IPopupModel {
+public abstract class BasePopupWindow extends PopupWindow implements PopupModule {
 
     private Context mContext;
     //获取屏幕参数
