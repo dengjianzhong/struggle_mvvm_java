@@ -1,6 +1,7 @@
 package com.zhong.struggle_mvvm.view.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,7 +11,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.struggle.base.base.mvvm.BaseVMActivity;
 import com.struggle.base.http.observer.SimpleObserver;
+import com.struggle.base.launcher.SPManager;
 import com.struggle.base.launcher.TxToast;
+import com.struggle.base.utils.GsonUtils;
 import com.zhong.struggle_mvvm.R;
 import com.zhong.struggle_mvvm.bean.TestBean;
 import com.zhong.struggle_mvvm.databinding.ActivityFramework1Binding;
@@ -37,6 +40,7 @@ public class FrameworkActivity1 extends BaseVMActivity<ActivityFramework1Binding
     public int getLayoutId() {
         return R.layout.activity_framework1;
     }
+
     @Override
     public void initView() {
         setTransparentStatusBar();
@@ -92,7 +96,10 @@ public class FrameworkActivity1 extends BaseVMActivity<ActivityFramework1Binding
         viewModel.articleDetail.observe(this, articleDetailBean -> TxToast.showToast("数据请求成功"));
 
         /**分类*/
-        viewModel.classify.observe(this, articleDetailBean -> TxToast.showToast("分类请求成功"));
+        viewModel.classify.observe(this, articleDetailBean -> {
+            SPManager.Instance().putValue("user_info", GsonUtils.toJson(articleDetailBean));
+            TxToast.showToast("分类请求成功");
+        });
     }
 
 
@@ -125,6 +132,7 @@ public class FrameworkActivity1 extends BaseVMActivity<ActivityFramework1Binding
 
     /**
      * 获取数据源
+     *
      * @return
      */
     private List<List<String>> getSourceData() {

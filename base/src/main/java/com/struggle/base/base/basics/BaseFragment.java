@@ -1,13 +1,12 @@
 package com.struggle.base.base.basics;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -45,18 +44,30 @@ public abstract class BaseFragment extends Fragment implements ViewModule {
         initEvent();
     }
 
+    @LayoutRes
+    protected abstract int getLayoutId();
+
+    protected void initView() {
+    }
+
+    protected void initData() {
+    }
+
+    protected void initEvent() {
+    }
+
     /**
-     * 隐藏软键盘
+     * 是否开启EventBus事件总线
+     * <p>
+     * false 默认关闭
      */
-    private void hideSoftKeyboard() {
-        // 隐藏软键盘，避免软键盘引发的内存泄露
-        View view = getActivity().getCurrentFocus();
-        if (view != null) {
-            InputMethodManager manager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-            if (manager != null && manager.isActive(view)) {
-                manager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-            }
-        }
+    protected boolean userEventBus() {
+        return false;
+    }
+
+    @Override
+    public Context getContext() {
+        return getActivity();
     }
 
     /**
@@ -80,31 +91,6 @@ public abstract class BaseFragment extends Fragment implements ViewModule {
         if (dialog != null && dialog.isShowing()) {
             dialog.cancel();
         }
-    }
-
-    /**
-     * 跳转页面
-     *
-     * @param destinationClass
-     * @param options
-     */
-    public void openActivity(Class<? extends BaseFragment> destinationClass, Bundle options) {
-        Intent intent = new Intent(getContext(), destinationClass);
-        if (options != null) intent.putExtras(options);
-        startActivity(intent);
-    }
-
-    /**
-     * 带返回信息的跳转
-     *
-     * @param destinationClass
-     * @param requestCode
-     * @param options
-     */
-    public void openActivity(Class<? extends BaseFragment> destinationClass, int requestCode, Bundle options) {
-        Intent intent = new Intent(getContext(), destinationClass);
-        if (options != null) intent.putExtras(options);
-        startActivityForResult(intent, requestCode);
     }
 
     @Override

@@ -13,7 +13,6 @@ import androidx.viewbinding.ViewBinding;
 
 import com.struggle.base.app.bean.DataResponse;
 import com.struggle.base.base.basics.BaseDialog;
-import com.struggle.base.base.model.DialogVmModule;
 import com.struggle.base.launcher.TxToast;
 import com.struggle.base.utils.ClassUtil;
 
@@ -25,7 +24,7 @@ import java.lang.reflect.Method;
  * @Description TODO
  */
 public abstract class BaseVMDialog<VB extends ViewBinding, VM extends BaseViewModel>
-        extends BaseDialog implements DialogVmModule {
+        extends BaseDialog  {
 
     protected VM viewModel;
     protected VB bind;
@@ -45,7 +44,10 @@ public abstract class BaseVMDialog<VB extends ViewBinding, VM extends BaseViewMo
         super.onViewCreated(view, savedInstanceState);
     }
 
-    @Override
+    /**
+     * 初始化ViewBinding
+     * @return
+     */
     public View getBindingView() {
         Class<VB> vbClass = (Class<VB>) ClassUtil.getParentGeneric(this, 0);
         try {
@@ -59,13 +61,14 @@ public abstract class BaseVMDialog<VB extends ViewBinding, VM extends BaseViewMo
         return null;
     }
 
-    @Override
+    /**
+     * 初始化ViewModel
+     */
     public void initViewModel() {
         Class<VM> vmClass = (Class<VM>) ClassUtil.getParentGeneric(this, 1);
         viewModel = new ViewModelProvider(this).get(vmClass);
     }
 
-    @Override
     public void initLiveData() {
         /**数据获取失败观察者*/
         viewModel.rep.messageLiveData.observe(this, (Observer<DataResponse<Object>>) bean -> {
@@ -80,5 +83,9 @@ public abstract class BaseVMDialog<VB extends ViewBinding, VM extends BaseViewMo
                 hideLoading();
             }
         });
+    }
+
+    protected void observer() {
+
     }
 }

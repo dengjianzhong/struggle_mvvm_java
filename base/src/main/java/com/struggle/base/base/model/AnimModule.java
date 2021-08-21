@@ -1,14 +1,13 @@
-package com.struggle.base.app.anim;
+package com.struggle.base.base.model;
 
 import com.struggle.base.R;
 
 /**
- *    author : Android 邓建忠
- *
- *    time   : 2019/09/21
- *    desc   : 动画样式
+ * @Author 邓建忠
+ * @CreateTime 2019/09/5 11:47
+ * @Description 动画样式
  */
-public interface AnimAction {
+public interface AnimModule {
 
     /** 默认动画效果 */
     int ANIM_DEFAULT = -1;

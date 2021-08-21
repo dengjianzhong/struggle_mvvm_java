@@ -139,29 +139,12 @@ public abstract class BaseDialog extends DialogFragment implements DialogModule 
         }
     }
 
-    /**
-     * 跳转页面
-     *
-     * @param destinationClass
-     * @param options
-     */
-    public void openActivity(Class<? extends BaseFragment> destinationClass, Bundle options) {
-        Intent intent = new Intent(getContext(), destinationClass);
-        if (options != null) intent.putExtras(options);
-        startActivity(intent);
-    }
-
-    /**
-     * 带返回信息的跳转
-     *
-     * @param destinationClass
-     * @param requestCode
-     * @param options
-     */
-    public void openActivity(Class<? extends BaseFragment> destinationClass, int requestCode, Bundle options) {
-        Intent intent = new Intent(getContext(), destinationClass);
-        if (options != null) intent.putExtras(options);
-        startActivityForResult(intent, requestCode);
+    @Override
+    public void onDestroyView() {
+        if (getDialog() != null) {
+            getDialog().setOnCancelListener(null);
+        }
+        super.onDestroyView();
     }
 
     @Override

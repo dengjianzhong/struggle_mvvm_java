@@ -1,6 +1,13 @@
 package com.struggle.base.base.model;
 
-import androidx.annotation.LayoutRes;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
+import com.jaeger.library.StatusBarUtil;
+import com.struggle.base.base.basics.BaseActivity;
 
 /**
  * @Author 邓建忠
@@ -8,34 +15,60 @@ import androidx.annotation.LayoutRes;
  * @Description TODO
  */
 public interface ViewModule {
+    /**
+     * 具体子类实现返回
+     */
+    Context getContext();
 
-    @LayoutRes
-    int getLayoutId();
-
-    default void initView() {
-    }
-
-    default void initData() {
-    }
-
-    default void initEvent() {
+    /**
+     * 获取 Activity 对象
+     */
+    default Activity getActivity() {
+        if (getContext() instanceof Activity) {
+            return ((Activity) getContext());
+        }
+        return null;
     }
 
     /**
-     * 是否开启EventBus事件总线
-     * <p>
-     * false 默认关闭
+     * 跳转页面
+     *
+     * @param destinationClass
+     * @param options
      */
-    default boolean userEventBus() {
-        return false;
+    default void openActivity(Class<? extends BaseActivity> destinationClass, Bundle options) {
+        if (getActivity()==null){
+            return;
+        }
+        Intent intent = new Intent(getActivity(), destinationClass);
+        if (options != null) intent.putExtras(options);
+        getActivity().startActivity(intent);
     }
 
     /**
-     * 禁止横屏
-     * <p>
-     * true 默认开启
+     * 带返回信息的跳转
+     *
+     * @param destinationClass
+     * @param requestCode
+     * @param options
      */
-    default boolean disableHorizontalScreen() {
-        return true;
+    default void openActivity(Class<? extends BaseActivity> destinationClass, int requestCode, Bundle options) {
+        if (getActivity()==null){
+            return;
+        }
+        Intent intent = new Intent(getActivity(), destinationClass);
+        if (options != null) intent.putExtras(options);
+        getActivity().startActivityForResult(intent, requestCode);
+    }
+
+    /**
+     * 设置透明状态栏
+     */
+    default void setTransparentStatusBar() {
+        if (getActivity()==null){
+            return;
+        }
+        StatusBarUtil.setTransparent(getActivity());
+        getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
     }
 }

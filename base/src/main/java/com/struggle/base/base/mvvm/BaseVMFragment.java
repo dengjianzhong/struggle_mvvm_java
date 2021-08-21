@@ -13,7 +13,6 @@ import androidx.viewbinding.ViewBinding;
 
 import com.struggle.base.app.bean.DataResponse;
 import com.struggle.base.base.basics.BaseFragment;
-import com.struggle.base.base.model.FragmentVmModule;
 import com.struggle.base.launcher.TxToast;
 import com.struggle.base.utils.ClassUtil;
 
@@ -24,8 +23,7 @@ import java.lang.reflect.Method;
  * @CreateTime 2021/8/8 22:05
  * @Description TODO
  */
-public abstract class BaseVMFragment<VB extends ViewBinding, VM extends BaseViewModel>
-        extends BaseFragment implements FragmentVmModule {
+public abstract class BaseVMFragment<VB extends ViewBinding, VM extends BaseViewModel> extends BaseFragment {
 
     protected VM viewModel;
     protected VB bind;
@@ -45,7 +43,10 @@ public abstract class BaseVMFragment<VB extends ViewBinding, VM extends BaseView
         super.onViewCreated(view, savedInstanceState);
     }
 
-    @Override
+    /**
+     * 初始化ViewBinding
+     * @return
+     */
     public View getBindingView() {
         Class<VB> vbClass = (Class<VB>) ClassUtil.getParentGeneric(this, 0);
         try {
@@ -59,13 +60,14 @@ public abstract class BaseVMFragment<VB extends ViewBinding, VM extends BaseView
         return null;
     }
 
-    @Override
+    /**
+     * 初始化ViewModel
+     */
     public void initViewModel() {
         Class<VM> vmClass = (Class<VM>) ClassUtil.getParentGeneric(this, 1);
         viewModel = new ViewModelProvider(this).get(vmClass);
     }
 
-    @Override
     public void initLiveData() {
         /**数据获取失败观察者*/
         viewModel.rep.messageLiveData.observe(this, (Observer<DataResponse<Object>>) bean -> {
@@ -80,5 +82,9 @@ public abstract class BaseVMFragment<VB extends ViewBinding, VM extends BaseView
                 hideLoading();
             }
         });
+    }
+
+    protected void observer() {
+
     }
 }

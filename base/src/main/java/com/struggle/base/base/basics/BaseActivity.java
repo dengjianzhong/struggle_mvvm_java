@@ -1,16 +1,16 @@
 package com.struggle.base.base.basics;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
 
+import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.jaeger.library.StatusBarUtil;
+import com.struggle.base.base.model.KeyboardModule;
 import com.struggle.base.base.model.ViewModule;
 import com.struggle.base.widgets.loadding.LoadingDialog;
 
@@ -21,7 +21,7 @@ import org.greenrobot.eventbus.EventBus;
  * @CreateTime 2021/8/5 11:47
  * @Description TODO
  */
-public abstract class BaseActivity extends AppCompatActivity implements ViewModule {
+public abstract class BaseActivity extends AppCompatActivity implements ViewModule, KeyboardModule {
 
     private LoadingDialog dialog;
 
@@ -48,6 +48,41 @@ public abstract class BaseActivity extends AppCompatActivity implements ViewModu
         initSoftKeyboard();
     }
 
+    @LayoutRes
+    protected abstract int getLayoutId();
+
+    protected void initView() {
+    }
+
+    protected void initData() {
+    }
+
+    protected void initEvent() {
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
+
+    /**
+     * 是否开启EventBus事件总线
+     * <p>
+     * false 默认关闭
+     */
+    protected boolean userEventBus() {
+        return false;
+    }
+
+    /**
+     * 禁止横屏
+     * <p>
+     * true 默认开启
+     */
+    protected boolean disableHorizontalScreen() {
+        return true;
+    }
+
     /**
      * 禁用设置Activity setContentView
      * <p>
@@ -63,21 +98,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ViewModu
      * 点击外部隐藏软键盘，提升用户体验
      */
     protected void initSoftKeyboard() {
-        findViewById(Window.ID_ANDROID_CONTENT).setOnClickListener(v -> hideSoftKeyboard());
-    }
-
-    /**
-     * 隐藏软键盘
-     */
-    private void hideSoftKeyboard() {
-        // 隐藏软键盘，避免软键盘引发的内存泄露
-        View view = getCurrentFocus();
-        if (view != null) {
-            InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            if (manager != null && manager.isActive(view)) {
-                manager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-            }
-        }
+        findViewById(Window.ID_ANDROID_CONTENT).setOnClickListener(v -> hideKeyboard(v));
     }
 
     /**
@@ -101,39 +122,6 @@ public abstract class BaseActivity extends AppCompatActivity implements ViewModu
         if (dialog != null && dialog.isShowing()) {
             dialog.cancel();
         }
-    }
-
-    /**
-     * 设置透明状态栏
-     */
-    protected void setTransparentStatusBar(){
-        StatusBarUtil.setTransparent(this);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-    }
-
-    /**
-     * 跳转页面
-     *
-     * @param destinationClass
-     * @param options
-     */
-    public void openActivity(Class<? extends BaseActivity> destinationClass, Bundle options) {
-        Intent intent = new Intent(this, destinationClass);
-        if (options != null) intent.putExtras(options);
-        startActivity(intent);
-    }
-
-    /**
-     * 带返回信息的跳转
-     *
-     * @param destinationClass
-     * @param requestCode
-     * @param options
-     */
-    public void openActivity(Class<? extends BaseActivity> destinationClass, int requestCode, Bundle options) {
-        Intent intent = new Intent(this, destinationClass);
-        if (options != null) intent.putExtras(options);
-        startActivityForResult(intent, requestCode);
     }
 
     @Override

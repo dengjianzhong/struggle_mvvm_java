@@ -32,4 +32,9 @@ public class MyDialog extends BaseVMDialog<DialogTestBinding, MyModel> {
             }
         });
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 }

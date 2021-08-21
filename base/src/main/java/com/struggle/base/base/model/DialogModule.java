@@ -2,8 +2,6 @@ package com.struggle.base.base.model;
 
 import androidx.annotation.LayoutRes;
 
-import com.struggle.base.app.anim.AnimAction;
-
 /**
  * @Author 邓建忠
  * @CreateTime 2021/8/5 14:06
@@ -35,7 +33,7 @@ public interface DialogModule {
      * @return
      */
     default int getAnimationStyle() {
-        return AnimAction.ANIM_IOS;
+        return AnimModule.ANIM_IOS;
     }
 
     /**

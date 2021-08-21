@@ -9,7 +9,6 @@ import androidx.viewbinding.ViewBinding;
 
 import com.struggle.base.app.bean.DataResponse;
 import com.struggle.base.base.basics.BaseActivity;
-import com.struggle.base.base.model.ActivityVmModule;
 import com.struggle.base.launcher.TxToast;
 import com.struggle.base.utils.ClassUtil;
 
@@ -20,8 +19,7 @@ import java.lang.reflect.Method;
  * @CreateTime 2021/8/8 15:37
  * @Description TODO
  */
-public abstract class BaseVMActivity<VB extends ViewBinding, VM extends BaseViewModel>
-        extends BaseActivity implements ActivityVmModule {
+public abstract class BaseVMActivity<VB extends ViewBinding, VM extends BaseViewModel> extends BaseActivity {
 
     protected VM viewModel;
     protected VB bind;
@@ -36,7 +34,9 @@ public abstract class BaseVMActivity<VB extends ViewBinding, VM extends BaseView
         super.onCreate(savedInstanceState);
     }
 
-    @Override
+    /**
+     * 初始化ViewBinding
+     */
     public void initBinding() {
         Class<VB> vbClass = (Class<VB>) ClassUtil.getParentGeneric(this, 0);
         try {
@@ -49,13 +49,14 @@ public abstract class BaseVMActivity<VB extends ViewBinding, VM extends BaseView
         }
     }
 
-    @Override
+    /**
+     * 初始化ViewModel
+     */
     public void initViewModel() {
         Class<VM> vmClass = (Class<VM>) ClassUtil.getParentGeneric(this, 1);
         viewModel = new ViewModelProvider(this).get(vmClass);
     }
 
-    @Override
     public void initLiveData() {
         /**数据获取失败观察者*/
         viewModel.rep.messageLiveData.observe(this, (Observer<DataResponse<Object>>) bean -> {
@@ -64,17 +65,23 @@ public abstract class BaseVMActivity<VB extends ViewBinding, VM extends BaseView
 
         /**加载弹窗观察者*/
         viewModel.rep.dialogLiveData.observe(this, (Observer<Boolean>) b -> {
-            if (b){
-                showLoading(false,"加载中...");
-            }else {
+            if (b) {
+                showLoading(false, "加载中...");
+            } else {
                 hideLoading();
             }
         });
     }
 
-    /**是否禁用setContentView，由于跟DataBinding存在冲突故此做法*/
+    /**
+     * 是否禁用setContentView，由于跟DataBinding存在冲突故此做法
+     */
     @Override
     public boolean disableSetView() {
         return false;
+    }
+
+    protected void observer() {
+
     }
 }
