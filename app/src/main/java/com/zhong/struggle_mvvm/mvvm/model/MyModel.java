@@ -1,13 +1,12 @@
-package com.zhong.struggle_mvvm.model;
+package com.zhong.struggle_mvvm.mvvm.model;
 
 import androidx.lifecycle.MutableLiveData;
 
 import com.struggle.base.base.mvvm.BaseViewModel;
-import com.struggle.base.http.observer.OnSubscribeListener;
 import com.zhong.struggle_mvvm.bean.ArticleDetailBean;
 import com.zhong.struggle_mvvm.bean.ClassifyBean;
 import com.zhong.struggle_mvvm.bean.TestBean;
-import com.zhong.struggle_mvvm.repository.MyRepository;
+import com.zhong.struggle_mvvm.mvvm.repository.MyRepository;
 
 import java.util.List;
 

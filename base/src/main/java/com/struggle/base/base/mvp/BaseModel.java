@@ -1,9 +1,9 @@
-package com.struggle.base.base.mvvm;
+package com.struggle.base.base.mvp;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.MutableLiveData;
 
 import com.struggle.base.app.bean.DataResponse;
+import com.struggle.base.base.mvp.impl.IView;
 import com.struggle.base.http.GoHttp;
 import com.struggle.base.http.observer.OnSubscribeListener;
 import com.struggle.base.utils.ClassUtil;
@@ -17,31 +17,28 @@ import io.reactivex.schedulers.Schedulers;
 
 /**
  * @Author 邓建忠
- * @CreateTime 2021/8/13 14:40
+ * @CreateTime 2021/8/23 14:05
  * @Description TODO
  */
-public abstract class BaseRepository<T> {
-
-    /**
-     * 加载错误相关信息
-     */
-    public MutableLiveData<DataResponse<Object>> messageLiveData = new MutableLiveData();
-
-    /**
-     * 显示/隐藏加载弹窗
-     * <p>
-     * true 显示加载弹窗
-     * false 隐藏加载弹窗
-     */
-    public MutableLiveData<Boolean> dialogLiveData = new MutableLiveData();
-
+public abstract class BaseModel<T> {
+    public IView mView;
     /**
      * 创建API请求对象
      */
     protected T api;
+
     {
         Class<T> apiClass = (Class<T>) ClassUtil.getParentGeneric(this, 0);
         api = GoHttp.Instance().create(apiClass);
+    }
+
+    /**
+     * 与V层绑定
+     *
+     * @param mView
+     */
+    public void attachView(IView mView) {
+        this.mView = mView;
     }
 
     /**
@@ -75,7 +72,7 @@ public abstract class BaseRepository<T> {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         if (useLoading) {
-                            dialogLiveData.postValue(true);//显示加载弹窗
+                            mView.showLoad();
                         }
                     }
 
@@ -86,7 +83,6 @@ public abstract class BaseRepository<T> {
                             return;
                         }
                         listener.onError(response);
-                        messageLiveData.postValue((DataResponse<Object>) response);
                     }
 
                     @Override
@@ -95,16 +91,15 @@ public abstract class BaseRepository<T> {
                         response.setMessage(NetUtil.analyzeException(e));
 
                         listener.onError(response);
-                        messageLiveData.postValue(response);
                         if (useLoading) {
-                            dialogLiveData.postValue(false);//隐藏加载弹窗
+                            mView.hideLoad();
                         }
                     }
 
                     @Override
                     public void onComplete() {
                         if (useLoading) {
-                            dialogLiveData.postValue(false);//隐藏加载弹窗
+                            mView.hideLoad();
                         }
                     }
                 });

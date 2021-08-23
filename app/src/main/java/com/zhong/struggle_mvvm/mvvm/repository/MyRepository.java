@@ -1,4 +1,4 @@
-package com.zhong.struggle_mvvm.repository;
+package com.zhong.struggle_mvvm.mvvm.repository;
 
 import com.struggle.base.base.mvvm.BaseRepository;
 import com.struggle.base.http.observer.OnSubscribeListener;

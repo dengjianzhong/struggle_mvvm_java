@@ -1,8 +1,6 @@
 package com.zhong.struggle_mvvm.view.activity;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
@@ -17,7 +15,7 @@ import com.struggle.base.utils.GsonUtils;
 import com.zhong.struggle_mvvm.R;
 import com.zhong.struggle_mvvm.bean.TestBean;
 import com.zhong.struggle_mvvm.databinding.ActivityFramework1Binding;
-import com.zhong.struggle_mvvm.model.MyModel;
+import com.zhong.struggle_mvvm.mvvm.model.MyModel;
 import com.zhong.struggle_mvvm.view.fragment.MyFragment;
 
 import java.util.ArrayList;
@@ -123,9 +121,12 @@ public class FrameworkActivity1 extends BaseVMActivity<ActivityFramework1Binding
                                     }
                                 });
                 break;
-            default:
+            case R.id.bt2:
                 /**跳转页面*/
                 openActivity(FrameworkActivity2.class, null);
+                break;
+            case R.id.bt3:
+                openActivity(FrameworkActivity3.class, null);
                 break;
         }
     }

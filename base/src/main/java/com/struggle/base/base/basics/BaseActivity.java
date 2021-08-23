@@ -3,15 +3,14 @@ package com.struggle.base.base.basics;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
 
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.jaeger.library.StatusBarUtil;
 import com.struggle.base.base.model.KeyboardModule;
 import com.struggle.base.base.model.ViewModule;
+import com.struggle.base.utils.ActivityManager;
 import com.struggle.base.widgets.loadding.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -29,6 +28,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ViewModu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ActivityManager.getInstance().addActivity(this);
         //是否禁用setContentView，由于跟DataBinding存在冲突故此做法
         if (disableSetView()) {
             setContentView(getLayoutId());
@@ -138,5 +138,6 @@ public abstract class BaseActivity extends AppCompatActivity implements ViewModu
             dialog.setOnShowListener(null);
             dialog = null;
         }
+        ActivityManager.getInstance().removeActivity(this);
     }
 }

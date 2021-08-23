@@ -3,7 +3,7 @@ package com.zhong.struggle_mvvm.view.fragment;
 import com.struggle.base.base.mvvm.BaseVMFragment;
 import com.zhong.struggle_mvvm.R;
 import com.zhong.struggle_mvvm.databinding.FragmentTestBinding;
-import com.zhong.struggle_mvvm.model.MyModel;
+import com.zhong.struggle_mvvm.mvvm.model.MyModel;
 import com.zhong.struggle_mvvm.view.dialog.MyDialog;
 
 /**
