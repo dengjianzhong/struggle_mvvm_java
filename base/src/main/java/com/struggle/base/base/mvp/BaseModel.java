@@ -3,6 +3,8 @@ package com.struggle.base.base.mvp;
 import androidx.annotation.NonNull;
 
 import com.struggle.base.app.bean.DataResponse;
+import com.struggle.base.app.bean.LoadingBean;
+import com.struggle.base.app.constants.AppConstants;
 import com.struggle.base.base.mvp.impl.IView;
 import com.struggle.base.http.GoHttp;
 import com.struggle.base.http.observer.OnSubscribeListener;
@@ -50,7 +52,51 @@ public abstract class BaseModel<T> {
      */
     protected <R> void launch(Observable<DataResponse<R>> observable,
                               OnSubscribeListener<R> listener) {
-        launch(observable, true, listener);
+        launch(observable, true, "加载中", false, listener);
+    }
+
+    /**
+     * 开始请求网络
+     *
+     * @param <R>
+     * @param observable
+     * @param useLoading 控制loading显示/隐藏
+     * @param listener
+     */
+    protected <R> void launch(Observable<DataResponse<R>> observable,
+                              boolean useLoading,
+                              OnSubscribeListener<R> listener) {
+        launch(observable, useLoading, "加载中", false, listener);
+    }
+
+    /**
+     * 开始请求网络
+     *
+     * @param <R>
+     * @param observable
+     * @param content    loading显示内容
+     * @param listener
+     */
+    protected <R> void launch(Observable<DataResponse<R>> observable,
+                              String content,
+                              OnSubscribeListener<R> listener) {
+        launch(observable, true, content, false, listener);
+    }
+
+    /**
+     * 开始请求网络
+     *
+     * @param <R>
+     * @param observable
+     * @param useLoading 控制loading显示/隐藏
+     * @param content    loading显示内容
+     * @param listener
+     */
+    protected <R> void launch(Observable<DataResponse<R>> observable,
+                              boolean useLoading,
+                              String content,
+                              OnSubscribeListener<R> listener) {
+        launch(observable, useLoading, content, false, listener);
     }
 
     /**
@@ -63,6 +109,8 @@ public abstract class BaseModel<T> {
      */
     protected <R> void launch(Observable<DataResponse<R>> observable,
                               boolean useLoading,
+                              String content,
+                              boolean mCancelable,
                               OnSubscribeListener<R> listener) {
 
         observable.subscribeOn(Schedulers.io())
@@ -72,16 +120,18 @@ public abstract class BaseModel<T> {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
                         if (useLoading) {
-                            mView.showLoad();
+                            LoadingBean bean = new LoadingBean(content, mCancelable, true);
+                            mView.showLoad(bean);
                         }
                     }
 
                     @Override
                     public void onNext(@NonNull DataResponse<R> response) {
-                        if (response.getStatus() == 100) {
+                        if (response.getStatus() == AppConstants.SUCCESS_CODE) {
                             listener.onSuccess(response.getData());
                             return;
                         }
+                        mView.onMessage(response);
                         listener.onError(response);
                     }
 
@@ -90,10 +140,11 @@ public abstract class BaseModel<T> {
                         DataResponse<Object> response = new DataResponse<>();
                         response.setMessage(NetUtil.analyzeException(e));
 
-                        listener.onError(response);
+                        mView.onMessage(response);
                         if (useLoading) {
                             mView.hideLoad();
                         }
+                        listener.onError(response);
                     }
 
                     @Override

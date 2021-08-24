@@ -21,7 +21,7 @@
         android:layout_marginLeft="@dimen/dp_5"
         android:layout_marginTop="@dimen/dp_10"
         android:gravity="center"
-        android:text="模拟网络请求"
+        android:text="测试网络请求"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tbView" />
 

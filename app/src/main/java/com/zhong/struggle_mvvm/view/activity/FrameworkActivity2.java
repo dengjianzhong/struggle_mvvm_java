@@ -41,4 +41,6 @@ public class FrameworkActivity2 extends BaseVMActivity<ActivityFramework2Binding
             TxToast.showToast("数据请求成功");
         });
     }
+
+
 }

@@ -1,9 +1,6 @@
 package com.zhong.struggle_mvvm.mvp.presenter;
 
-import com.struggle.base.app.bean.DataResponse;
 import com.struggle.base.base.mvp.BasePresenter;
-import com.struggle.base.http.observer.OnSubscribeListener;
-import com.zhong.struggle_mvvm.bean.ArticleDetailBean;
 import com.zhong.struggle_mvvm.mvp.contract.MyContract;
 import com.zhong.struggle_mvvm.mvp.model.MyMvpModel;
 
@@ -15,16 +12,6 @@ import com.zhong.struggle_mvvm.mvp.model.MyMvpModel;
 public class MyPresenter extends BasePresenter<MyContract.View, MyMvpModel> implements MyContract.Presenter {
     @Override
     public void requestArticleDetail(String id) {
-        model.requestArticleDetail(id, new OnSubscribeListener<ArticleDetailBean>() {
-            @Override
-            public void onSuccess(ArticleDetailBean bean) {
-                mView.onArticleDetail(bean);
-            }
-
-            @Override
-            public void onError(DataResponse bean) {
-                mView.onMessage(bean.getMessage());
-            }
-        });
+        model.requestArticleDetail(id, bean -> mView.onArticleDetail(bean));
     }
 }

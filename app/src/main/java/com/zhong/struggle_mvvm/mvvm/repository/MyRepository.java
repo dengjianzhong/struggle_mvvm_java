@@ -21,7 +21,7 @@ public class MyRepository extends BaseRepository<ApiService> {
      * @param listener
      */
     public void requestGanHuo(OnSubscribeListener<List<TestBean>> listener) {
-        launch(api.requestArticle(), listener);
+        launch(api.requestArticle(), "...", listener);
     }
 
     /**
@@ -31,7 +31,7 @@ public class MyRepository extends BaseRepository<ApiService> {
      * @param listener
      */
     public void requestArticleDetail(String id, OnSubscribeListener<ArticleDetailBean> listener) {
-        launch(api.requestArticleDetail(id), listener);
+        launch(api.requestArticleDetail(id), "拼命加载中...", listener);
     }
 
 
@@ -41,6 +41,6 @@ public class MyRepository extends BaseRepository<ApiService> {
      * @param listener
      */
     public void requestGirl(OnSubscribeListener<List<ClassifyBean>> listener) {
-        launch(api.requestGirl(), listener);
+        launch(api.requestGirl(), "正在获取分类...", listener);
     }
 }

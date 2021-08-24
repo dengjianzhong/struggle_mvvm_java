@@ -2,6 +2,8 @@ package com.struggle.base.base.mvp;
 
 import android.os.Bundle;
 
+import com.struggle.base.app.bean.DataResponse;
+import com.struggle.base.app.bean.LoadingBean;
 import com.struggle.base.base.basics.BaseActivity;
 import com.struggle.base.base.mvp.impl.IView;
 import com.struggle.base.launcher.TxToast;
@@ -26,7 +28,7 @@ public abstract class BaseMVPActivity<T extends BasePresenter> extends BaseActiv
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //绑定P层
+        /**绑定P层*/
         if (presenter != null && !presenter.isAttachView()) {
             presenter.attachView(this);
         }
@@ -46,27 +48,17 @@ public abstract class BaseMVPActivity<T extends BasePresenter> extends BaseActiv
     //---V层回调统一处理----
 
     @Override
-    public void showLoad() {
-
-    }
-
-    @Override
-    public void showLoad(boolean mCancelable) {
-
-    }
-
-    @Override
-    public void showLoad(boolean mCancelable, String text) {
-
+    public void showLoad(LoadingBean bean) {
+        showLoading(bean.isCancelable(), bean.getContent());
     }
 
     @Override
     public void hideLoad() {
-
+        hideLoading();
     }
 
     @Override
-    public void onMessage(String msg) {
-        TxToast.showToast(msg);
+    public void onMessage(DataResponse bean) {
+        TxToast.showToast(bean.getMessage());
     }
 }

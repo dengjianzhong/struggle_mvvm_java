@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewbinding.ViewBinding;
 
 import com.struggle.base.app.bean.DataResponse;
+import com.struggle.base.app.bean.LoadingBean;
 import com.struggle.base.base.basics.BaseDialog;
 import com.struggle.base.launcher.TxToast;
 import com.struggle.base.utils.ClassUtil;
@@ -24,7 +25,7 @@ import java.lang.reflect.Method;
  * @Description TODO
  */
 public abstract class BaseVMDialog<VB extends ViewBinding, VM extends BaseViewModel>
-        extends BaseDialog  {
+        extends BaseDialog {
 
     protected VM viewModel;
     protected VB bind;
@@ -46,6 +47,7 @@ public abstract class BaseVMDialog<VB extends ViewBinding, VM extends BaseViewMo
 
     /**
      * 初始化ViewBinding
+     *
      * @return
      */
     public View getBindingView() {
@@ -76,9 +78,9 @@ public abstract class BaseVMDialog<VB extends ViewBinding, VM extends BaseViewMo
         });
 
         /**加载弹窗观察者*/
-        viewModel.rep.dialogLiveData.observe(this, (Observer<Boolean>) b -> {
-            if (b) {
-                showLoading(false, "加载中...");
+        viewModel.rep.dialogLiveData.observe(this, (Observer<LoadingBean>) b -> {
+            if (b.isShow()) {
+                showLoading(b.isCancelable(), b.getContent());
             } else {
                 hideLoading();
             }

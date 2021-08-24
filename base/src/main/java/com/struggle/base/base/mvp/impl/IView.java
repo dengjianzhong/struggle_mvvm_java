@@ -1,13 +1,12 @@
 package com.struggle.base.base.mvp.impl;
 
+import com.struggle.base.app.bean.DataResponse;
+import com.struggle.base.app.bean.LoadingBean;
+
 public interface IView {
-    void showLoad();
-
-    void showLoad(boolean mCancelable);
-
-    void showLoad(boolean mCancelable, String text);
+    void showLoad(LoadingBean b);
 
     void hideLoad();
 
-    void onMessage(String msg);
+    void onMessage(DataResponse msg);
 }
