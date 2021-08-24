@@ -35,7 +35,7 @@ public abstract class BaseModel<T> {
     }
 
     /**
-     * 与V层绑定
+     * 与V层需统一处理数据jinx绑定
      *
      * @param mView
      */
@@ -121,7 +121,7 @@ public abstract class BaseModel<T> {
                     public void onSubscribe(@NonNull Disposable d) {
                         if (useLoading) {
                             LoadingBean bean = new LoadingBean(content, mCancelable, true);
-                            mView.showLoad(bean);
+                            mView.showLoad(bean);//显示加载弹窗
                         }
                     }
 
@@ -142,7 +142,7 @@ public abstract class BaseModel<T> {
 
                         mView.onMessage(response);
                         if (useLoading) {
-                            mView.hideLoad();
+                            mView.hideLoad();//隐藏加载弹窗
                         }
                         listener.onError(response);
                     }
@@ -150,7 +150,7 @@ public abstract class BaseModel<T> {
                     @Override
                     public void onComplete() {
                         if (useLoading) {
-                            mView.hideLoad();
+                            mView.hideLoad();//隐藏加载弹窗
                         }
                     }
                 });

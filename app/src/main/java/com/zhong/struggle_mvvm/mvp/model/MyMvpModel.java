@@ -14,6 +14,6 @@ import com.zhong.struggle_mvvm.mvp.contract.MyContract;
 public class MyMvpModel extends BaseModel<ApiService> implements MyContract.Model {
     @Override
     public void requestArticleDetail(String id, OnSubscribeListener<ArticleDetailBean> listener) {
-        launch(api.requestArticleDetail(id), listener);
+        launch(api.requestArticleDetail(id), "拼命加载中...", listener);
     }
 }
