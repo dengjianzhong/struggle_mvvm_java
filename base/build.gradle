@@ -66,4 +66,8 @@ dependencies {
 
     //沉浸式状态栏
     api 'com.jaeger.statusbarutil:library:1.4.0'
+
+    api 'com.scwang.smart:refresh-layout-kernel:2.0.3'      //核心必须依赖
+    api 'com.scwang.smart:refresh-header-classics:2.0.3'    //经典刷新头
+    api 'com.scwang.smart:refresh-footer-classics:2.0.3'    //经典加载
 }
