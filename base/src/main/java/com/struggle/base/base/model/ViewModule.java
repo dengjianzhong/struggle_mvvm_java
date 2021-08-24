@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 
 import com.jaeger.library.StatusBarUtil;
 import com.struggle.base.base.basics.BaseActivity;
@@ -37,7 +38,7 @@ public interface ViewModule {
      * @param options
      */
     default void openActivity(Class<? extends BaseActivity> destinationClass, Bundle options) {
-        if (getActivity()==null){
+        if (getActivity() == null) {
             return;
         }
         Intent intent = new Intent(getActivity(), destinationClass);
@@ -53,7 +54,7 @@ public interface ViewModule {
      * @param options
      */
     default void openActivity(Class<? extends BaseActivity> destinationClass, int requestCode, Bundle options) {
-        if (getActivity()==null){
+        if (getActivity() == null) {
             return;
         }
         Intent intent = new Intent(getActivity(), destinationClass);
@@ -65,9 +66,10 @@ public interface ViewModule {
      * 设置透明状态栏
      */
     default void setTransparentStatusBar() {
-        if (getActivity()==null){
+        if (getActivity() == null) {
             return;
         }
+        getActivity().findViewById(Window.ID_ANDROID_CONTENT).setFitsSystemWindows(true);
         StatusBarUtil.setTransparent(getActivity());
         getActivity().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
     }
