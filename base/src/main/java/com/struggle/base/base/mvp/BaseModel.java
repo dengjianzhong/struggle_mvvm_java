@@ -20,7 +20,7 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * @Author 邓建忠
  * @CreateTime 2021/8/23 14:05
- * @Description TODO
+ * @Description M层需要继承
  */
 public abstract class BaseModel<T> {
     public IView mView;

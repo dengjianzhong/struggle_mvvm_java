@@ -12,7 +12,7 @@ import com.struggle.base.utils.ClassUtil;
 /**
  * @Author 邓建忠
  * @CreateTime 2021/8/23 12:39
- * @Description TODO
+ * @Description V层需要继承的activity
  */
 public abstract class BaseMVPActivity<T extends BasePresenter> extends BaseActivity implements IView {
     protected T presenter;

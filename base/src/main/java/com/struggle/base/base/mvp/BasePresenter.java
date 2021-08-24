@@ -9,9 +9,17 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
+/**
+ * @Author 邓建忠
+ * @CreateTime 2021/8/23 12:39
+ * @Description P层需要继承
+ */
 public abstract class BasePresenter<V extends IView, M extends BaseModel> implements IPresenter<V> {
     private WeakReference<V> weakReference;
     public V mView;
+    /**
+     * 动态创建M层对象
+     **/
     protected M model;
 
     {

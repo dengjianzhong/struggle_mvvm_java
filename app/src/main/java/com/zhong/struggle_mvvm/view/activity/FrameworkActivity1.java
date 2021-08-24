@@ -52,7 +52,7 @@ public class FrameworkActivity1 extends BaseVMActivity<ActivityFramework1Binding
 
     @Override
     public void initData() {
-        bind.tvView.setText("模拟网络请求");
+        bind.tvView.setText("测试网络请求");
     }
 
     @Override
