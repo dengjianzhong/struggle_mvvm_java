@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.widget.FrameLayout;
 import android.widget.PopupWindow;
 
-import com.struggle.base.base.model.PopupModule;
+import com.struggle.base.base.action.PopupModule;
 import com.struggle.base.launcher.UIPix;
 
 /**
@@ -18,7 +18,7 @@ import com.struggle.base.launcher.UIPix;
  */
 public abstract class BasePopupWindow extends PopupWindow implements PopupModule {
 
-    private Context mContext;
+    private final Context mContext;
     //获取屏幕参数
     protected DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
     private final int dp1;

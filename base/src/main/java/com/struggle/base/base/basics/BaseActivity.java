@@ -8,8 +8,8 @@ import android.view.Window;
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.struggle.base.base.model.KeyboardModule;
-import com.struggle.base.base.model.ViewModule;
+import com.struggle.base.base.action.KeyboardModule;
+import com.struggle.base.base.action.ViewModule;
 import com.struggle.base.utils.ActivityManager;
 import com.struggle.base.widgets.loadding.LoadingDialog;
 

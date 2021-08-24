@@ -1,4 +1,4 @@
-package com.struggle.base.base.model;
+package com.struggle.base.base.action;
 
 import androidx.annotation.LayoutRes;
 

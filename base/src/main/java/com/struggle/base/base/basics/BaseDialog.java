@@ -1,7 +1,6 @@
 package com.struggle.base.base.basics;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -18,7 +17,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.struggle.base.R;
-import com.struggle.base.base.model.DialogModule;
+import com.struggle.base.base.action.DialogModule;
 import com.struggle.base.widgets.loadding.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;

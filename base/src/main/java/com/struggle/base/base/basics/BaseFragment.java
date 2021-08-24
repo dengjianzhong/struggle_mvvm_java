@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.struggle.base.base.model.ViewModule;
+import com.struggle.base.base.action.ViewModule;
 import com.struggle.base.widgets.loadding.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
