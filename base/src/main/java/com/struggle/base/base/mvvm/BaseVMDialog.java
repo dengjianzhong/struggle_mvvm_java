@@ -24,17 +24,9 @@ import java.lang.reflect.Method;
  * @CreateTime 2021/8/8 22:21
  * @Description TODO
  */
-public abstract class BaseVMDialog<VB extends ViewBinding, VM extends BaseViewModel>
-        extends BaseDialog {
+public abstract class BaseVMDialog<VB extends ViewBinding, VM extends BaseViewModel> extends BaseDialog<VB> {
 
     protected VM viewModel;
-    protected VB bind;
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return getBindingView();
-    }
 
     @Override
     public void onViewCreated(@Nullable View view, @Nullable Bundle savedInstanceState) {
@@ -43,24 +35,6 @@ public abstract class BaseVMDialog<VB extends ViewBinding, VM extends BaseViewMo
         observer();
 
         super.onViewCreated(view, savedInstanceState);
-    }
-
-    /**
-     * 初始化ViewBinding
-     *
-     * @return
-     */
-    public View getBindingView() {
-        Class<VB> vbClass = (Class<VB>) ClassUtil.getParentGeneric(this, 0);
-        try {
-            Method inflate = vbClass.getDeclaredMethod("inflate", LayoutInflater.class);
-            bind = (VB) inflate.invoke(null, getLayoutInflater());
-
-            return bind.getRoot();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     /**
@@ -88,6 +62,5 @@ public abstract class BaseVMDialog<VB extends ViewBinding, VM extends BaseViewMo
     }
 
     protected void observer() {
-
     }
 }

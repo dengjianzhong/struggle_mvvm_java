@@ -3,26 +3,32 @@ package com.struggle.base.base.basics;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Window;
 
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewbinding.ViewBinding;
 
 import com.struggle.base.base.action.KeyboardModule;
 import com.struggle.base.base.action.ViewModule;
 import com.struggle.base.utils.ActivityManager;
+import com.struggle.base.utils.ClassUtil;
 import com.struggle.base.widgets.loadding.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.lang.reflect.Method;
 
 /**
  * @Author 邓建忠
  * @CreateTime 2021/8/5 11:47
  * @Description TODO
  */
-public abstract class BaseActivity extends AppCompatActivity implements ViewModule, KeyboardModule {
+public abstract class BaseActivity<VB extends ViewBinding> extends AppCompatActivity implements ViewModule, KeyboardModule {
 
     private LoadingDialog dialog;
+    protected VB bind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +48,7 @@ public abstract class BaseActivity extends AppCompatActivity implements ViewModu
             EventBus.getDefault().register(this);
         }
 
+        initBinding();
         initView();
         initData();
         initEvent();
@@ -63,6 +70,21 @@ public abstract class BaseActivity extends AppCompatActivity implements ViewModu
     @Override
     public Context getContext() {
         return this;
+    }
+
+    /**
+     * 初始化ViewBinding
+     */
+    public void initBinding() {
+        Class<VB> vbClass = (Class<VB>) ClassUtil.getParentGeneric(this, 0);
+        try {
+            Method inflate = vbClass.getDeclaredMethod("inflate", LayoutInflater.class);
+            bind = (VB) inflate.invoke(null, getLayoutInflater());
+
+            setContentView(bind.getRoot());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

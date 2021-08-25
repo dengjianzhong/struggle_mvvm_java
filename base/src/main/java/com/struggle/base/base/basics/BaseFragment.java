@@ -10,24 +10,30 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewbinding.ViewBinding;
 
 import com.struggle.base.base.action.ViewModule;
+import com.struggle.base.utils.ClassUtil;
 import com.struggle.base.widgets.loadding.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.lang.reflect.Method;
 
 /**
  * @Author 邓建忠
  * @CreateTime 2021/8/5 11:47
  * @Description TODO
  */
-public abstract class BaseFragment extends Fragment implements ViewModule {
+public abstract class BaseFragment<VB extends ViewBinding> extends Fragment implements ViewModule {
+
     private LoadingDialog dialog;
+    protected VB bind;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return LayoutInflater.from(getContext()).inflate(getLayoutId(), container, false);
+        return getBindingView();
     }
 
     @Override
@@ -54,6 +60,23 @@ public abstract class BaseFragment extends Fragment implements ViewModule {
     }
 
     protected void initEvent() {
+    }
+
+    /**
+     * 初始化ViewBinding
+     * @return
+     */
+    public View getBindingView() {
+        Class<VB> vbClass = (Class<VB>) ClassUtil.getParentGeneric(this, 0);
+        try {
+            Method inflate = vbClass.getDeclaredMethod("inflate", LayoutInflater.class);
+            bind = (VB) inflate.invoke(null, getLayoutInflater());
+
+            return bind.getRoot();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**

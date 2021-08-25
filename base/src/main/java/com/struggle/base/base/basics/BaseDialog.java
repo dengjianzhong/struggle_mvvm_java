@@ -13,24 +13,29 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.viewbinding.ViewBinding;
 
 import com.struggle.base.R;
 import com.struggle.base.base.action.DialogModule;
 import com.struggle.base.base.action.KeyboardModule;
+import com.struggle.base.utils.ClassUtil;
 import com.struggle.base.widgets.loadding.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.lang.reflect.Method;
 
 /**
  * @Author 邓建忠
  * @CreateTime 2021/8/5 11:47
  * @Description TODO
  */
-public abstract class BaseDialog extends DialogFragment implements DialogModule, KeyboardModule {
+public abstract class BaseDialog<VB extends ViewBinding> extends DialogFragment implements DialogModule, KeyboardModule {
 
     //获取屏幕参数
     protected DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
     private LoadingDialog dialog;
+    protected VB bind;
 
     @Override
     public int getTheme() {
@@ -40,7 +45,7 @@ public abstract class BaseDialog extends DialogFragment implements DialogModule,
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return LayoutInflater.from(getContext()).inflate(getLayoutId(), container, false);
+        return getBindingView();
     }
 
     @Override
@@ -55,6 +60,24 @@ public abstract class BaseDialog extends DialogFragment implements DialogModule,
         initData();
         initEvent();
         initSoftKeyboard();
+    }
+
+    /**
+     * 初始化ViewBinding
+     *
+     * @return
+     */
+    public View getBindingView() {
+        Class<VB> vbClass = (Class<VB>) ClassUtil.getParentGeneric(this, 0);
+        try {
+            Method inflate = vbClass.getDeclaredMethod("inflate", LayoutInflater.class);
+            bind = (VB) inflate.invoke(null, getLayoutInflater());
+
+            return bind.getRoot();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

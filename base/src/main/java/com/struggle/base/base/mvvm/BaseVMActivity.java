@@ -20,34 +20,17 @@ import java.lang.reflect.Method;
  * @CreateTime 2021/8/8 15:37
  * @Description TODO
  */
-public abstract class BaseVMActivity<VB extends ViewBinding, VM extends BaseViewModel> extends BaseActivity {
+public abstract class BaseVMActivity<VB extends ViewBinding, VM extends BaseViewModel> extends BaseActivity<VB> {
 
     protected VM viewModel;
-    protected VB bind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        initBinding();
         initViewModel();
         initLiveData();
         observer();
 
         super.onCreate(savedInstanceState);
-    }
-
-    /**
-     * 初始化ViewBinding
-     */
-    public void initBinding() {
-        Class<VB> vbClass = (Class<VB>) ClassUtil.getParentGeneric(this, 0);
-        try {
-            Method inflate = vbClass.getDeclaredMethod("inflate", LayoutInflater.class);
-            bind = (VB) inflate.invoke(null, getLayoutInflater());
-
-            setContentView(bind.getRoot());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /**

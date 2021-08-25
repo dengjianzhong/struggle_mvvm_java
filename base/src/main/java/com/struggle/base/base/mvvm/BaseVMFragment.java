@@ -24,10 +24,9 @@ import java.lang.reflect.Method;
  * @CreateTime 2021/8/8 22:05
  * @Description TODO
  */
-public abstract class BaseVMFragment<VB extends ViewBinding, VM extends BaseViewModel> extends BaseFragment {
+public abstract class BaseVMFragment<VB extends ViewBinding, VM extends BaseViewModel> extends BaseFragment<VB> {
 
     protected VM viewModel;
-    protected VB bind;
 
     @Nullable
     @Override
@@ -42,23 +41,6 @@ public abstract class BaseVMFragment<VB extends ViewBinding, VM extends BaseView
         observer();
 
         super.onViewCreated(view, savedInstanceState);
-    }
-
-    /**
-     * 初始化ViewBinding
-     * @return
-     */
-    public View getBindingView() {
-        Class<VB> vbClass = (Class<VB>) ClassUtil.getParentGeneric(this, 0);
-        try {
-            Method inflate = vbClass.getDeclaredMethod("inflate", LayoutInflater.class);
-            bind = (VB) inflate.invoke(null, getLayoutInflater());
-
-            return bind.getRoot();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     /**
@@ -86,6 +68,5 @@ public abstract class BaseVMFragment<VB extends ViewBinding, VM extends BaseView
     }
 
     protected void observer() {
-
     }
 }
