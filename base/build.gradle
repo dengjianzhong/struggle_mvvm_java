@@ -1,7 +1,9 @@
 plugins {
     id 'com.android.library'
+    id 'com.github.dcendents.android-maven'
 }
 apply from: '../config.gradle'
+group = 'com.github.plaindev'
 
 android {
     buildTypes {
