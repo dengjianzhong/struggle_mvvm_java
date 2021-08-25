@@ -1,3 +1,5 @@
+import java.text.SimpleDateFormat
+
 plugins {
     id 'com.android.application'
 }
@@ -18,9 +20,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
-            minifyEnabled false
-            shrinkResources false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        //打包后应用名称
+        applicationVariants.all { variant ->
+            variant.outputs.all { output ->
+                def outputFile = output.outputFile
+                def fileName
+                def format = new SimpleDateFormat("YYYY-MM-dd HH-mm")
+                if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                    if (variant.buildType.name == 'release') {//如果是release包
+                        fileName = "struggle_release_v${defaultConfig.versionName} (${format.format(new Date())}).apk"
+                    } else if (variant.buildType.name == 'debug') {//如果是debug包
+                        fileName = "struggle_debug_v${defaultConfig.versionName} (${format.format(new Date())}).apk"
+                    }
+                    outputFileName = fileName
+                }
+            }
         }
     }
 }
