@@ -1,6 +1,13 @@
 package com.struggle.base.base.mvp;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
 
 import com.struggle.base.app.bean.DataResponse;
 import com.struggle.base.app.bean.LoadingBean;
@@ -9,12 +16,15 @@ import com.struggle.base.base.mvp.impl.IView;
 import com.struggle.base.launcher.TxToast;
 import com.struggle.base.utils.ClassUtil;
 
+import java.lang.reflect.Method;
+
 /**
  * @Author 邓建忠
  * @CreateTime 2021/8/23 12:39
  * @Description V层需要继承的Fragment
  */
-public abstract class BaseMVPFragment<T extends BasePresenter> extends BaseFragment implements IView {
+public abstract class BaseMVPFragment<VB extends ViewBinding, T extends BasePresenter> extends BaseFragment implements IView {
+    protected VB bind;
     protected T presenter;
 
     {
@@ -34,6 +44,29 @@ public abstract class BaseMVPFragment<T extends BasePresenter> extends BaseFragm
         }
 
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return getBindingView();
+    }
+
+    /**
+     * 初始化ViewBinding
+     *
+     * @return
+     */
+    public View getBindingView() {
+        Class<VB> vbClass = (Class<VB>) ClassUtil.getParentGeneric(this, 0);
+        try {
+            Method inflate = vbClass.getDeclaredMethod("inflate", LayoutInflater.class);
+            bind = (VB) inflate.invoke(null, getLayoutInflater());
+
+            return bind.getRoot();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
