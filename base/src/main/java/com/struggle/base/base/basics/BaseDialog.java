@@ -1,6 +1,5 @@
 package com.struggle.base.base.basics;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -9,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +16,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.struggle.base.R;
 import com.struggle.base.base.action.DialogModule;
+import com.struggle.base.base.action.KeyboardModule;
 import com.struggle.base.widgets.loadding.LoadingDialog;
 
 import org.greenrobot.eventbus.EventBus;
@@ -27,7 +26,7 @@ import org.greenrobot.eventbus.EventBus;
  * @CreateTime 2021/8/5 11:47
  * @Description TODO
  */
-public abstract class BaseDialog extends DialogFragment implements DialogModule {
+public abstract class BaseDialog extends DialogFragment implements DialogModule, KeyboardModule {
 
     //获取屏幕参数
     protected DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
@@ -96,23 +95,7 @@ public abstract class BaseDialog extends DialogFragment implements DialogModule 
      * 点击外部隐藏软键盘，提升用户体验
      */
     protected void initSoftKeyboard() {
-        getDialog().getWindow().findViewById(Window.ID_ANDROID_CONTENT).setOnClickListener(v -> hideSoftKeyboard());
-    }
-
-    /**
-     * 隐藏软键盘
-     */
-    private void hideSoftKeyboard() {
-        if (isResumed()) {
-            // 隐藏软键盘，避免软键盘引发的内存泄露
-            View view = getActivity().getCurrentFocus();
-            if (view != null) {
-                InputMethodManager manager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                if (manager != null && manager.isActive(view)) {
-                    manager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-                }
-            }
-        }
+        getDialog().getWindow().findViewById(Window.ID_ANDROID_CONTENT).setOnClickListener(v -> hideKeyboard(v));
     }
 
     /**
