@@ -35,6 +35,15 @@ public interface ViewModule {
      * 跳转页面
      *
      * @param destinationClass
+     */
+    default void openActivity(Class<? extends BaseActivity> destinationClass) {
+        openActivity(destinationClass, null);
+    }
+
+    /**
+     * 跳转页面
+     *
+     * @param destinationClass
      * @param options
      */
     default void openActivity(Class<? extends BaseActivity> destinationClass, Bundle options) {
@@ -44,6 +53,16 @@ public interface ViewModule {
         Intent intent = new Intent(getActivity(), destinationClass);
         if (options != null) intent.putExtras(options);
         getActivity().startActivity(intent);
+    }
+
+    /**
+     * 带返回信息的跳转
+     *
+     * @param destinationClass
+     * @param requestCode
+     */
+    default void openActivity(Class<? extends BaseActivity> destinationClass, int requestCode) {
+        openActivity(destinationClass, requestCode, null);
     }
 
     /**

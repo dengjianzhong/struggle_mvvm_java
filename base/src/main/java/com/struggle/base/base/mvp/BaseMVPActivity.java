@@ -58,14 +58,6 @@ public abstract class BaseMVPActivity<VB extends ViewBinding, T extends BasePres
         }
     }
 
-    /**
-     * 是否禁用setContentView，由于跟DataBinding存在冲突故此做法
-     */
-    @Override
-    public boolean disableSetView() {
-        return false;
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();

@@ -1,0 +1,121 @@
+package com.zhong.struggle_mvvm.view.activity;
+
+import android.util.Log;
+import android.view.View;
+
+import com.contrarywind.adapter.WheelAdapter;
+import com.struggle.base.base.basics.BaseActivity;
+import com.zhong.struggle_mvvm.R;
+import com.zhong.struggle_mvvm.databinding.ActivityFramework5Binding;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+
+/**
+ * @Author 邓建忠
+ * @CreateTime 2021/8/6 17:39
+ * @Description RxJava功能演示(3)
+ */
+public class FrameworkActivity5 extends BaseActivity<ActivityFramework5Binding> {
+
+    @Override
+    protected void initView() {
+        super.initView();
+
+        List<String> dataList = getSingleListSourceData();
+        bind.wheelView.setCyclic(false);
+        bind.wheelView.setAdapter(new WheelAdapter<String>() {
+            @Override
+            public int getItemsCount() {
+                return dataList.size();
+            }
+
+            @Override
+            public String getItem(int index) {
+                return dataList.get(index);
+            }
+
+            @Override
+            public int indexOf(String o) {
+                return dataList.indexOf(o);
+            }
+        });
+    }
+
+    @Override
+    protected void initEvent() {
+        super.initEvent();
+
+        bind.wheelView.setOnItemSelectedListener(index -> {
+            Log.i("===>", String.format("当前数据:%d", index));
+        });
+    }
+
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.bt1:
+                Observable.fromArray(getArraySourceData())
+                        .subscribeOn(Schedulers.io())
+                        .unsubscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(s -> {
+                            Log.i("===>", String.format("fromArray:%s", s));
+                        });
+                break;
+
+            case R.id.bt2:
+                Observable.fromIterable(getSingleListSourceData())
+                        .filter(s -> s.contains("3"))
+                        .subscribeOn(Schedulers.io())
+                        .unsubscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(s -> Log.i("===>", String.format("fromIterable:%s", s)));
+                break;
+        }
+    }
+
+    /**
+     * 获取双层列表数据源
+     *
+     * @return
+     */
+    private List<List<String>> getTwoListSourceData() {
+        List<List<String>> lists = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            List<String> childList = new ArrayList<>();
+            for (int j = 0; j < 10; j++) {
+                childList.add(i + "-" + j);
+            }
+            lists.add(childList);
+        }
+
+        return lists;
+    }
+
+    /**
+     * 获取单层列表数据源
+     *
+     * @return
+     */
+    private List<String> getSingleListSourceData() {
+        List<String> lists = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            lists.add(i + "-");
+        }
+
+        return lists;
+    }
+
+    /**
+     * 获取数组数据源
+     *
+     * @return
+     */
+    private String[] getArraySourceData() {
+        return new String[]{"a", "b", "c", "d", "e"};
+    }
+}

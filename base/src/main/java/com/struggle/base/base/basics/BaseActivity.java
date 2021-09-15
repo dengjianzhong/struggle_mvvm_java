@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Window;
 
-import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewbinding.ViewBinding;
 
@@ -35,10 +34,6 @@ public abstract class BaseActivity<VB extends ViewBinding> extends AppCompatActi
         super.onCreate(savedInstanceState);
 
         ActivityManager.getInstance().addActivity(this);
-        //是否禁用setContentView，由于跟DataBinding存在冲突故此做法
-        if (disableSetView()) {
-            setContentView(getLayoutId());
-        }
         //是否禁止横屏
         if (disableHorizontalScreen()) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -54,9 +49,6 @@ public abstract class BaseActivity<VB extends ViewBinding> extends AppCompatActi
         initEvent();
         initSoftKeyboard();
     }
-
-    @LayoutRes
-    protected abstract int getLayoutId();
 
     protected void initView() {
     }
@@ -102,15 +94,6 @@ public abstract class BaseActivity<VB extends ViewBinding> extends AppCompatActi
      * true 默认开启
      */
     protected boolean disableHorizontalScreen() {
-        return true;
-    }
-
-    /**
-     * 禁用设置Activity setContentView
-     * <p>
-     * true 默认开启
-     */
-    public boolean disableSetView() {
         return true;
     }
 

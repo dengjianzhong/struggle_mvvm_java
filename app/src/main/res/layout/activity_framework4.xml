@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.activity.FrameworkActivity2">
+
+    <com.struggle.base.widgets.TitleBarView
+        android:id="@+id/tbView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:center_title="架构功能演示(4)"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tbView">
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重庆市渝北区1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重庆市渝北区2"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重庆市渝北区3"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="重庆市渝北区4"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="tv1,tv2" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:visibility="gone"
+            app:constraint_referenced_ids="tv1,tv2,tv3,tv4"
+            app:flow_horizontalGap="@dimen/dp_30"
+            app:flow_wrapMode="none"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/v1"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_200"
+            android:background="@color/color_3EC1FF"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvXX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:background="@color/color_C2C2C2"
+            android:gravity="center"
+            android:text="忽视的不是忽视的忽视的不是忽视的忽视的不是忽视的忽视的不是忽视的"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="@+id/v1"
+            app:layout_constraintLeft_toRightOf="@+id/v1"
+            app:layout_constraintRight_toLeftOf="@id/v2"
+            app:layout_constraintTop_toTopOf="@+id/v1" />
+
+        <View
+            android:id="@+id/v2"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_200"
+            android:background="@color/color_3EC1FF"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="v1,v2,tvXX" />
+
+        <androidx.constraintlayout.helper.widget.Layer
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/color_FC6A6A"
+            android:visibility="gone"
+            app:constraint_referenced_ids="tvb1,tvb2"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvb1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="A"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/v1" />
+
+        <TextView
+            android:id="@+id/tvb2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:text="B"
+            app:layout_constraintLeft_toRightOf="@+id/tvb1"
+            app:layout_constraintTop_toBottomOf="@+id/v1" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:text="左边"
+            app:layout_constraintLeft_toRightOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp_20"
+            android:autoLink="phone"
+            android:clickable="true"
+            android:text="右边"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintRight_toLeftOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lineHeight="@dimen/dp_30" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

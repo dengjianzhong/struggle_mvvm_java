@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".view.activity.FrameworkActivity5">
+
+    <com.struggle.base.widgets.TitleBarView
+        android:id="@+id/tbView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:center_title="RxJava功能演示(5)"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/bt1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="fromArray" />
+
+        <Button
+            android:id="@+id/bt2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="fromIterable" />
+
+        <com.contrarywind.view.WheelView
+            android:id="@+id/wheelView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_200" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

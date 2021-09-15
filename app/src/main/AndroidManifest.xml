@@ -3,7 +3,6 @@
     package="com.zhong.struggle_mvvm">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
-    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Struggle_mvvm_java">
-        <activity android:name=".view.activity.FrameworkActivity3"></activity>
+        <activity android:name=".view.activity.FrameworkActivity5"></activity>
+        <activity android:name=".view.activity.FrameworkActivity4" />
+        <activity android:name=".view.activity.FrameworkActivity3" />
         <activity android:name=".view.activity.FrameworkActivity2" />
         <activity android:name=".view.activity.FrameworkActivity1" />
         <activity

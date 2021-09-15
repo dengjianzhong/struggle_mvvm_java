@@ -17,11 +17,6 @@ import com.zhong.struggle_mvvm.view.dialog.MyDialog;
 public class FrameworkActivity2 extends BaseVMActivity<ActivityFramework2Binding, MyModel> {
 
     @Override
-    public int getLayoutId() {
-        return R.layout.activity_framework2;
-    }
-
-    @Override
     public void initView() {
         setTransparentStatusBar();
     }

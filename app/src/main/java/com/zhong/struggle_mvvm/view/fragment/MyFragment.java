@@ -1,7 +1,6 @@
 package com.zhong.struggle_mvvm.view.fragment;
 
 import com.struggle.base.base.mvvm.BaseVMFragment;
-import com.zhong.struggle_mvvm.R;
 import com.zhong.struggle_mvvm.databinding.FragmentTestBinding;
 import com.zhong.struggle_mvvm.mvvm.model.MyModel;
 import com.zhong.struggle_mvvm.view.dialog.MyDialog;
@@ -12,10 +11,6 @@ import com.zhong.struggle_mvvm.view.dialog.MyDialog;
  * @Description TODO
  */
 public class MyFragment extends BaseVMFragment<FragmentTestBinding, MyModel> {
-    @Override
-    public int getLayoutId() {
-        return R.layout.fragment_test;
-    }
 
     @Override
     public void initEvent() {

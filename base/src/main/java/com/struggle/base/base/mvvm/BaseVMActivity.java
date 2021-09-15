@@ -1,7 +1,6 @@
 package com.struggle.base.base.mvvm;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -12,8 +11,6 @@ import com.struggle.base.app.bean.LoadingBean;
 import com.struggle.base.base.basics.BaseActivity;
 import com.struggle.base.launcher.TxToast;
 import com.struggle.base.utils.ClassUtil;
-
-import java.lang.reflect.Method;
 
 /**
  * @Author 邓建忠
@@ -55,14 +52,6 @@ public abstract class BaseVMActivity<VB extends ViewBinding, VM extends BaseView
                 hideLoading();
             }
         });
-    }
-
-    /**
-     * 是否禁用setContentView，由于跟DataBinding存在冲突故此做法
-     */
-    @Override
-    public boolean disableSetView() {
-        return false;
     }
 
     protected void observer() {

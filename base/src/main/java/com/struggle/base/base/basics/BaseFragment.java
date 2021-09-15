@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -49,9 +48,6 @@ public abstract class BaseFragment<VB extends ViewBinding> extends Fragment impl
         initData();
         initEvent();
     }
-
-    @LayoutRes
-    protected abstract int getLayoutId();
 
     protected void initView() {
     }

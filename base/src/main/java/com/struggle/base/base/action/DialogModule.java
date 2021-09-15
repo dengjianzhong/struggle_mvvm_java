@@ -1,16 +1,11 @@
 package com.struggle.base.base.action;
 
-import androidx.annotation.LayoutRes;
-
 /**
  * @Author 邓建忠
  * @CreateTime 2021/8/5 14:06
  * @Description TODO
  */
 public interface DialogModule {
-
-    @LayoutRes
-    int getLayoutId();
 
     default void initView() {
     }

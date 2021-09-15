@@ -17,10 +17,6 @@ import com.zhong.struggle_mvvm.mvp.presenter.MyPresenter;
  * @Description 架构功能演示(3)
  */
 public class FrameworkActivity3 extends BaseMVPActivity<ActivityFramework3Binding, MyPresenter> implements MyContract.View {
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_framework3;
-    }
 
     @Override
     protected void initView() {

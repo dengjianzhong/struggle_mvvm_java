@@ -34,10 +34,6 @@ import io.reactivex.schedulers.Schedulers;
  * @Description 架构功能演示(1)
  */
 public class FrameworkActivity1 extends BaseVMActivity<ActivityFramework1Binding, MyModel> {
-    @Override
-    public int getLayoutId() {
-        return R.layout.activity_framework1;
-    }
 
     @Override
     public void initView() {
@@ -122,11 +118,16 @@ public class FrameworkActivity1 extends BaseVMActivity<ActivityFramework1Binding
                                 });
                 break;
             case R.id.bt2:
-                /**跳转页面*/
-                openActivity(FrameworkActivity2.class, null);
+                openActivity(FrameworkActivity2.class);
                 break;
             case R.id.bt3:
-                openActivity(FrameworkActivity3.class, null);
+                openActivity(FrameworkActivity3.class);
+                break;
+            case R.id.bt4:
+                openActivity(FrameworkActivity4.class);
+                break;
+            case R.id.bt5:
+                openActivity(FrameworkActivity5.class);
                 break;
         }
     }
