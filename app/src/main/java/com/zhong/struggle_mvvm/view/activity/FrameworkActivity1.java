@@ -129,6 +129,9 @@ public class FrameworkActivity1 extends BaseVMActivity<ActivityFramework1Binding
             case R.id.bt5:
                 openActivity(FrameworkActivity5.class);
                 break;
+            case R.id.bt6:
+                openActivity(FrameworkActivity6.class);
+                break;
         }
     }
 

@@ -1,6 +1,9 @@
 package com.zhong.struggle_mvvm.view.fragment;
 
+import androidx.activity.OnBackPressedCallback;
+
 import com.struggle.base.base.mvvm.BaseVMFragment;
+import com.struggle.base.launcher.TxToast;
 import com.zhong.struggle_mvvm.databinding.FragmentTestBinding;
 import com.zhong.struggle_mvvm.mvvm.model.MyModel;
 import com.zhong.struggle_mvvm.view.dialog.MyDialog;
@@ -12,9 +15,19 @@ import com.zhong.struggle_mvvm.view.dialog.MyDialog;
  */
 public class MyFragment extends BaseVMFragment<FragmentTestBinding, MyModel> {
 
+    private final Boolean noAllowBack = true;
+
     @Override
     public void initEvent() {
         bind.btTest.setOnClickListener(v -> viewModel.requestGanHuo());
+
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(noAllowBack) {
+            @Override
+            public void handleOnBackPressed() {
+                setEnabled(false);
+                TxToast.showToast("fragment监听到返回");
+            }
+        });
     }
 
     @Override

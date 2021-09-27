@@ -17,11 +17,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @Description TODO
  */
 public class GoHttp {
-    //默认超时时间
-    private final int DEFAULT_TIMEOUT = 120;
-    //网络请求客户端
-    private Retrofit retrofit;
     private static GoHttp goHttp;
+    //默认超时时间
+    private final int DEFAULT_TIMEOUT = 30;
+    //网络请求客户端
+    private final Retrofit retrofit;
 
     public static GoHttp Instance() {
         if (goHttp == null) {
