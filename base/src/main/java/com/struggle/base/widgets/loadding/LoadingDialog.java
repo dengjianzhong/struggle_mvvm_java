@@ -1,7 +1,6 @@
 package com.struggle.base.widgets.loadding;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -21,7 +20,7 @@ import com.struggle.base.widgets.loadding.renderer.LoadingView;
  * @since 2019/4/9 14:16
  */
 public class LoadingDialog extends AppCompatDialog implements IMessageLoader {
-    private String loadingTipText = "加载中...";
+    private final String loadingTipText = "加载中...";
     private TextView mTvTipMessage;
     private DaisyView mLoadingView;
     private LoadingView contentView;

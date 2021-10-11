@@ -24,11 +24,7 @@ public class PermissionsUtil {
                     .request(new OnPermission() {
                         @Override
                         public void hasPermission(List<String> granted, boolean isAll) {
-                            if (isAll) {
-                                iPermissions.onSuccess(true);
-                            } else {
-                                iPermissions.onSuccess(false);
-                            }
+                            iPermissions.onSuccess(isAll);
                         }
 
                         @Override

@@ -86,8 +86,6 @@ public class ActivityManager {
      * @param activity
      */
     public void removeActivity(Activity activity) {
-        if (activityList.contains(activity)) {
-            activityList.remove(activity);
-        }
+        activityList.remove(activity);
     }
 }

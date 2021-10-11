@@ -22,7 +22,7 @@ import com.struggle.base.R;
  * @Description 公共标题bar
  */
 public class TitleBarView extends FrameLayout {
-    private int defaultColor = 0xff2a2a2a;
+    private final int defaultColor = 0xff2a2a2a;
     private ImageView ivBack;
 
     public TitleBarView(@NonNull Context context) {

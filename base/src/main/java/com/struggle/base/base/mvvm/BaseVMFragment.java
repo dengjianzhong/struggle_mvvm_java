@@ -17,8 +17,6 @@ import com.struggle.base.base.basics.BaseFragment;
 import com.struggle.base.launcher.TxToast;
 import com.struggle.base.utils.ClassUtil;
 
-import java.lang.reflect.Method;
-
 /**
  * @Author 邓建忠
  * @CreateTime 2021/8/8 22:05
@@ -48,17 +46,17 @@ public abstract class BaseVMFragment<VB extends ViewBinding, VM extends BaseView
      */
     public void initViewModel() {
         Class<VM> vmClass = (Class<VM>) ClassUtil.getParentGeneric(this, 1);
-        viewModel = new ViewModelProvider(this).get(vmClass);
+        viewModel = new ViewModelProvider(requireActivity()).get(vmClass);
     }
 
     public void initLiveData() {
         /**数据获取失败观察者*/
-        viewModel.rep.messageLiveData.observe(this, (Observer<DataResponse<Object>>) bean -> {
+        viewModel.rep.messageLiveData.observe(getViewLifecycleOwner(), (Observer<DataResponse<Object>>) bean -> {
             TxToast.showToast(bean.getMessage());
         });
 
         /**加载弹窗观察者*/
-        viewModel.rep.dialogLiveData.observe(this, (Observer<LoadingBean>) b -> {
+        viewModel.rep.dialogLiveData.observe(getViewLifecycleOwner(), (Observer<LoadingBean>) b -> {
             if (b.isShow()) {
                 showLoading(b.isCancelable(), b.getContent());
             } else {

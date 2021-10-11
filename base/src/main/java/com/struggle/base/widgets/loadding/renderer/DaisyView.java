@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.struggle.base.launcher.UIPix;
-import com.struggle.base.utils.UIUtils;
 
 
 /**
@@ -68,7 +67,7 @@ public class DaisyView extends View {
         requestLayout();
     }
 
-    private ValueAnimator.AnimatorUpdateListener mUpdateListener = new ValueAnimator.AnimatorUpdateListener() {
+    private final ValueAnimator.AnimatorUpdateListener mUpdateListener = new ValueAnimator.AnimatorUpdateListener() {
         @Override
         public void onAnimationUpdate(ValueAnimator animation) {
             mAnimateValue = (int) animation.getAnimatedValue();
