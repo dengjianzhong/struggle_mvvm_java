@@ -63,7 +63,7 @@ public class IOHandler {
      * @param runnable
      */
     public static void postWork(Runnable runnable) {
-        if (mainHandler == null) {
+        if (workHandler == null) {
             throw new RuntimeException("IOHandler is not initialized");
         }
 
