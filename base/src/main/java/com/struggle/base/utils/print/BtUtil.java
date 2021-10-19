@@ -1,4 +1,4 @@
-package com.struggle.base.utils;
+package com.struggle.base.utils.print;
 
 import android.bluetooth.BluetoothClass;
 

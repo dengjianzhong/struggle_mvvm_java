@@ -10,4 +10,23 @@
         <!--设置居中标题大小,默认16sp,单位sp-->
         <attr name="center_title_size" format="float" />
     </declare-styleable>
+
+    <declare-styleable name="SeniorTextView">
+        <!--左上角圆角-->
+        <attr name="leftTopRadius" format="dimension" />
+        <!--右上角圆角-->
+        <attr name="rightTopRadius" format="dimension" />
+        <!--右下角圆角-->
+        <attr name="rightBottomRadius" format="dimension" />
+        <!--左下角圆角-->
+        <attr name="leftBottomRadius" format="dimension" />
+        <!--左上右上右下左下圆角-->
+        <attr name="radius" format="dimension" />
+        <!--背景颜色-->
+        <attr name="solidColor" format="color" />
+        <!--边框宽-->
+        <attr name="stroke_width" format="dimension" />
+        <!--边框颜色-->
+        <attr name="stroke_color" format="color" />
+    </declare-styleable>
 </resources>

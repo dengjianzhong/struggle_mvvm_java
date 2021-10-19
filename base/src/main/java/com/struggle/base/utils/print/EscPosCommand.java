@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.Charset;
 
-public class PrintHelper {
+public class EscPosCommand {
 
     /**
      * 打印纸一行最大的字节
@@ -35,46 +35,6 @@ public class PrintHelper {
     public static final int MEAL_NAME_MAX_LENGTH = 8;
 
     private static OutputStream outputStream = null;
-
-    public static OutputStream getOutputStream() {
-        return outputStream;
-    }
-
-    public static void setOutputStream(OutputStream outputStream) {
-        PrintHelper.outputStream = outputStream;
-    }
-
-
-    /**
-     * 打印文字
-     *
-     * @param text 要打印的文字
-     */
-    public static void printText(String text) {
-        try {
-            byte[] data = text.getBytes("gbk");
-            outputStream.write(data, 0, data.length);
-            outputStream.flush();
-        } catch (IOException e) {
-            //Toast.makeText(this.context, "发送失败！", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * 设置打印格式
-     *
-     * @param command 格式指令
-     */
-    public static void selectCommand(byte[] command) {
-        try {
-            outputStream.write(command);
-            outputStream.flush();
-        } catch (IOException e) {
-            //Toast.makeText(this.context, "发送失败！", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-        }
-    }
 
     /**
      * 复位打印机
@@ -134,27 +94,51 @@ public class PrintHelper {
     /**
      * 设置行间距
      */
-//	public static final byte[] LINE_SPACING = {0x1b, 0x32};//{0x1b, 0x33, 0x14};  // 20的行间距（0，255）
+    //public static final byte[] LINE_SPACING = {0x1b, 0x32};//{0x1b, 0x33, 0x14};  // 20的行间距（0，255）
+    public static OutputStream getOutputStream() {
+        return outputStream;
+    }
+
+    /**
+     * 设置打印通道
+     *
+     * @param outputStream
+     */
+    public static void setOutputStream(OutputStream outputStream) {
+        EscPosCommand.outputStream = outputStream;
+    }
 
 
-//	final byte[][] byteCommands = {
-//			{ 0x1b, 0x61, 0x00 }, // 左对齐
-//			{ 0x1b, 0x61, 0x01 }, // 中间对齐
-//			{ 0x1b, 0x61, 0x02 }, // 右对齐
-//			{ 0x1b, 0x40 },// 复位打印机
-//			{ 0x1b, 0x4d, 0x00 },// 标准ASCII字体
-//			{ 0x1b, 0x4d, 0x01 },// 压缩ASCII字体
-//			{ 0x1d, 0x21, 0x00 },// 字体不放大
-//			{ 0x1d, 0x21, 0x11 },// 宽高加倍
-//			{ 0x1b, 0x45, 0x00 },// 取消加粗模式
-//			{ 0x1b, 0x45, 0x01 },// 选择加粗模式
-//			{ 0x1b, 0x7b, 0x00 },// 取消倒置打印
-//			{ 0x1b, 0x7b, 0x01 },// 选择倒置打印
-//			{ 0x1d, 0x42, 0x00 },// 取消黑白反显
-//			{ 0x1d, 0x42, 0x01 },// 选择黑白反显
-//			{ 0x1b, 0x56, 0x00 },// 取消顺时针旋转90°
-//			{ 0x1b, 0x56, 0x01 },// 选择顺时针旋转90°
-//	};
+    /**
+     * 打印文字
+     *
+     * @param text 要打印的文字
+     */
+    public static void printText(String text) {
+        try {
+            byte[] data = text.getBytes("gbk");
+            outputStream.write(data, 0, data.length);
+            outputStream.flush();
+        } catch (IOException e) {
+            //Toast.makeText(this.context, "发送失败！", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 设置打印格式
+     *
+     * @param command 格式指令
+     */
+    public static void selectCommand(byte[] command) {
+        try {
+            outputStream.write(command);
+            outputStream.flush();
+        } catch (IOException e) {
+            //Toast.makeText(this.context, "发送失败！", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
+    }
 
     /**
      * 打印两列
