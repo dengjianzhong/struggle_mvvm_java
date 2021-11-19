@@ -29,4 +29,17 @@
         <!--边框颜色-->
         <attr name="stroke_color" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="LabelView">
+        <!--标签文本-->
+        <attr name="label" format="string" />
+        <!--标签大小-->
+        <attr name="label_size" format="dimension" />
+        <!--标签颜色-->
+        <attr name="label_color" format="color" />
+        <!--形状颜色-->
+        <attr name="shape_color" format="color" />
+        <!--右下角圆角大小-->
+        <attr name="right_bottom_radius" format="dimension" />
+    </declare-styleable>
 </resources>

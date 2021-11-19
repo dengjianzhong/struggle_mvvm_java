@@ -69,4 +69,28 @@ public class IOHandler {
 
         workHandler.post(runnable);
     }
+
+    /**
+     * 移除指定消息队列
+     *
+     * @param runnable
+     */
+    public static void remove(Runnable runnable) {
+        if (workHandler == null) {
+            throw new RuntimeException("IOHandler is not initialized");
+        }
+
+        workHandler.removeCallbacks(runnable);
+    }
+
+    /**
+     * 移除所有消息队列
+     */
+    public static void removeAll() {
+        if (workHandler == null) {
+            throw new RuntimeException("IOHandler is not initialized");
+        }
+
+        workHandler.removeCallbacksAndMessages(null);
+    }
 }

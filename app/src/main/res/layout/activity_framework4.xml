@@ -23,33 +23,25 @@
             android:id="@+id/tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="重庆市渝北区1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="重庆市渝北区1" />
 
         <TextView
             android:id="@+id/tv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="重庆市渝北区2"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="重庆市渝北区2" />
 
         <TextView
             android:id="@+id/tv3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="重庆市渝北区3"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="重庆市渝北区3" />
 
         <TextView
             android:id="@+id/tv4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="重庆市渝北区4"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="重庆市渝北区4" />
 
         <androidx.constraintlayout.widget.Group
             android:layout_width="wrap_content"
@@ -58,11 +50,10 @@
 
         <androidx.constraintlayout.helper.widget.Flow
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_100"
-            android:visibility="gone"
+            android:layout_height="wrap_content"
             app:constraint_referenced_ids="tv1,tv2,tv3,tv4"
             app:flow_horizontalGap="@dimen/dp_30"
-            app:flow_wrapMode="none"
+            app:flow_wrapMode="aligned"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
