@@ -3,7 +3,7 @@ package com.zhong.struggle_mvvm.view.dialog;
 import com.struggle.base.base.mvvm.BaseVMDialog;
 import com.struggle.base.launcher.TxToast;
 import com.zhong.struggle_mvvm.databinding.DialogTestBinding;
-import com.zhong.struggle_mvvm.mvvm.model.MyModel;
+import com.zhong.struggle_mvvm.logic.mvvm.model.MyModel;
 
 /**
  * @Author 邓建忠

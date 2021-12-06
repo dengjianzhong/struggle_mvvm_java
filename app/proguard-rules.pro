@@ -20,4 +20,4 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.zhong.struggle_mvvm.bean.**{*;}
+-keep class com.zhong.struggle_mvvm.logic.bean.**{*;}

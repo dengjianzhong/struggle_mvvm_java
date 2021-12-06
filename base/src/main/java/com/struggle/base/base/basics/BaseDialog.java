@@ -16,8 +16,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.viewbinding.ViewBinding;
 
 import com.struggle.base.R;
-import com.struggle.base.base.action.DialogModule;
-import com.struggle.base.base.action.KeyboardModule;
+import com.struggle.base.base.plugins.DialogPlugin;
+import com.struggle.base.base.plugins.KeyboardPlugin;
 import com.struggle.base.utils.ClassUtil;
 import com.struggle.base.widgets.loadding.LoadingDialog;
 
@@ -30,7 +30,7 @@ import java.lang.reflect.Method;
  * @CreateTime 2021/8/5 11:47
  * @Description TODO
  */
-public abstract class BaseDialog<VB extends ViewBinding> extends DialogFragment implements DialogModule, KeyboardModule {
+public abstract class BaseDialog<VB extends ViewBinding> extends DialogFragment implements DialogPlugin, KeyboardPlugin {
 
     //获取屏幕参数
     protected DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();

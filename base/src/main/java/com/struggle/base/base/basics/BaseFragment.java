@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewbinding.ViewBinding;
 
-import com.struggle.base.base.action.ViewModule;
+import com.struggle.base.base.plugins.ViewPlugin;
 import com.struggle.base.utils.ClassUtil;
 import com.struggle.base.widgets.loadding.LoadingDialog;
 
@@ -24,7 +24,7 @@ import java.lang.reflect.Method;
  * @CreateTime 2021/8/5 11:47
  * @Description TODO
  */
-public abstract class BaseFragment<VB extends ViewBinding> extends Fragment implements ViewModule {
+public abstract class BaseFragment<VB extends ViewBinding> extends Fragment implements ViewPlugin {
 
     private LoadingDialog dialog;
     protected VB bind;

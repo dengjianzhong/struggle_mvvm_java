@@ -6,10 +6,10 @@ import com.struggle.base.app.bean.DataResponse;
 import com.struggle.base.base.mvp.BaseMVPActivity;
 import com.struggle.base.launcher.TxToast;
 import com.zhong.struggle_mvvm.R;
-import com.zhong.struggle_mvvm.bean.ArticleDetailBean;
 import com.zhong.struggle_mvvm.databinding.ActivityFramework3Binding;
-import com.zhong.struggle_mvvm.mvp.contract.MyContract;
-import com.zhong.struggle_mvvm.mvp.presenter.MyPresenter;
+import com.zhong.struggle_mvvm.logic.bean.ArticleDetailBean;
+import com.zhong.struggle_mvvm.logic.mvp.contract.MyContract;
+import com.zhong.struggle_mvvm.logic.mvp.presenter.MyPresenter;
 
 /**
  * @Author 邓建忠

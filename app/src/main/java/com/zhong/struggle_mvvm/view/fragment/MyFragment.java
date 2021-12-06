@@ -5,7 +5,7 @@ import androidx.activity.OnBackPressedCallback;
 import com.struggle.base.base.mvvm.BaseVMFragment;
 import com.struggle.base.launcher.TxToast;
 import com.zhong.struggle_mvvm.databinding.FragmentTestBinding;
-import com.zhong.struggle_mvvm.mvvm.model.MyModel;
+import com.zhong.struggle_mvvm.logic.mvvm.model.MyModel;
 import com.zhong.struggle_mvvm.view.dialog.MyDialog;
 
 /**

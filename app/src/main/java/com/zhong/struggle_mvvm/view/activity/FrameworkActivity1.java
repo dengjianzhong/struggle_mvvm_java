@@ -13,9 +13,9 @@ import com.struggle.base.launcher.SPManager;
 import com.struggle.base.launcher.TxToast;
 import com.struggle.base.utils.GsonUtils;
 import com.zhong.struggle_mvvm.R;
-import com.zhong.struggle_mvvm.bean.TestBean;
 import com.zhong.struggle_mvvm.databinding.ActivityFramework1Binding;
-import com.zhong.struggle_mvvm.mvvm.model.MyModel;
+import com.zhong.struggle_mvvm.logic.bean.TestBean;
+import com.zhong.struggle_mvvm.logic.mvvm.model.MyModel;
 import com.zhong.struggle_mvvm.view.fragment.MyFragment;
 
 import java.util.ArrayList;
@@ -49,6 +49,21 @@ public class FrameworkActivity1 extends BaseVMActivity<ActivityFramework1Binding
     @Override
     public void initData() {
         bind.tvView.setText("测试网络请求");
+
+
+        /*XGPushConfig.enableDebug(this,true);
+        XGPushManager.registerPush(this, new XGIOperateCallback() {
+            @Override
+            public void onSuccess(Object data, int flag) {
+                //token在设备卸载重装的时候有可能会变
+                Log.d("TPush", "注册成功，设备token为：" + data);
+            }
+
+            @Override
+            public void onFail(Object data, int errCode, String msg) {
+                Log.d("TPush", "注册失败，错误码：" + errCode + ",错误信息：" + msg);
+            }
+        });*/
     }
 
     @Override
@@ -134,6 +149,9 @@ public class FrameworkActivity1 extends BaseVMActivity<ActivityFramework1Binding
                 break;
             case R.id.bt7:
                 openActivity(FrameworkActivity7.class);
+                break;
+            case R.id.bt8:
+                openActivity(FrameworkActivity8.class);
                 break;
         }
     }

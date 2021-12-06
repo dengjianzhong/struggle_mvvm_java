@@ -9,8 +9,8 @@ import android.view.Window;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewbinding.ViewBinding;
 
-import com.struggle.base.base.action.KeyboardModule;
-import com.struggle.base.base.action.ViewModule;
+import com.struggle.base.base.plugins.KeyboardPlugin;
+import com.struggle.base.base.plugins.ViewPlugin;
 import com.struggle.base.utils.ActivityManager;
 import com.struggle.base.utils.ClassUtil;
 import com.struggle.base.widgets.loadding.LoadingDialog;
@@ -24,7 +24,7 @@ import java.lang.reflect.Method;
  * @CreateTime 2021/8/5 11:47
  * @Description TODO
  */
-public abstract class BaseActivity<VB extends ViewBinding> extends AppCompatActivity implements ViewModule, KeyboardModule {
+public abstract class BaseActivity<VB extends ViewBinding> extends AppCompatActivity implements ViewPlugin, KeyboardPlugin {
 
     private LoadingDialog dialog;
     protected VB bind;

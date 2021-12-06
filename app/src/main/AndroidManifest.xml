@@ -3,6 +3,11 @@
     package="com.zhong.struggle_mvvm">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.READ_SMS" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Struggle_mvvm_java">
-        <activity android:name=".view.activity.FrameworkActivity7"></activity>
+        <activity android:name=".view.activity.FrameworkActivity8"></activity>
+        <activity android:name=".view.activity.FrameworkActivity7" />
         <activity android:name=".view.activity.FrameworkActivity6" />
         <activity android:name=".view.activity.FrameworkActivity5" />
         <activity android:name=".view.activity.FrameworkActivity4" />

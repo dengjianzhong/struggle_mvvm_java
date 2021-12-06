@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.zhong.struggle_mvvm.R;
-import com.zhong.struggle_mvvm.bean.FirstNode;
-import com.zhong.struggle_mvvm.bean.SecondNode;
+import com.zhong.struggle_mvvm.logic.bean.FirstNode;
+import com.zhong.struggle_mvvm.logic.bean.SecondNode;
 
 import java.util.ArrayList;
 import java.util.Iterator;

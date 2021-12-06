@@ -6,8 +6,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.struggle.base.BaseApp;
 import com.struggle.base.base.basics.BaseActivity;
-import com.zhong.struggle_mvvm.bean.FirstNode;
 import com.zhong.struggle_mvvm.databinding.ActivityFramework6Binding;
+import com.zhong.struggle_mvvm.logic.bean.FirstNode;
 import com.zhong.struggle_mvvm.view.adapter.CityAdapter;
 
 import java.io.ByteArrayOutputStream;
