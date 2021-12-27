@@ -2,17 +2,26 @@ package com.zhong.struggle_mvvm.view.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 
+import com.google.gson.Gson;
+import com.struggle.base.app.bean.SmsLogBean;
 import com.struggle.base.base.mvvm.BaseVMActivity;
 import com.struggle.base.base.plugins.PermissionPlugin;
 import com.struggle.base.launcher.TxToast;
 import com.struggle.base.other.NotificationHelper;
 import com.zhong.struggle_mvvm.R;
 import com.zhong.struggle_mvvm.databinding.ActivityFramework2Binding;
+import com.zhong.struggle_mvvm.logic.bean.print.DNBFoodMessageBean;
 import com.zhong.struggle_mvvm.logic.mvvm.model.MyModel;
 import com.zhong.struggle_mvvm.other.ContentProviderHelper;
 import com.zhong.struggle_mvvm.view.dialog.MyDialog;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 
 /**
  * @Author 邓建忠
@@ -20,6 +29,8 @@ import com.zhong.struggle_mvvm.view.dialog.MyDialog;
  * @Description 架构功能演示(2)
  */
 public class FrameworkActivity2 extends BaseVMActivity<ActivityFramework2Binding, MyModel> implements PermissionPlugin {
+
+    private long startTime = 1639701650000L;//查询 短信/电话 开始时间
 
     @Override
     public void initView() {
@@ -36,11 +47,13 @@ public class FrameworkActivity2 extends BaseVMActivity<ActivityFramework2Binding
                 NotificationHelper.sendNotification();
                 break;
             case R.id.button4:
-                requestPermission(new String[]{Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS}, b -> {
-                    if (b) {
-                        ContentProviderHelper.querySms(this);
-                    }
-                });
+                startTime = System.currentTimeMillis();
+                break;
+            case R.id.button5:
+                /*DNBFoodMessageBean bean = parseJson();
+                if (bean != null) {
+
+                }*/
                 break;
             default:
                 MyDialog dialog = new MyDialog();
@@ -59,5 +72,60 @@ public class FrameworkActivity2 extends BaseVMActivity<ActivityFramework2Binding
     @Override
     public Activity getActivity() {
         return this;
+    }
+
+    /**
+     * 解析城市列表
+     *
+     * @return
+     */
+    private DNBFoodMessageBean parseJson() {
+        ByteArrayOutputStream outputStream = null;
+        InputStream inputStream = null;
+        try {
+            outputStream = new ByteArrayOutputStream();
+            inputStream = getResources().getAssets().open("print.json");
+            int len;
+            byte[] bytes = new byte[5 * 1024];
+            while ((len = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, len);
+            }
+            outputStream.flush();
+            return new Gson().fromJson(new String(outputStream.toByteArray()), DNBFoodMessageBean.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (outputStream != null) outputStream.close();
+                if (inputStream != null) inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        /*requestPermission(new String[]{Manifest.permission.READ_CONTACTS, Manifest.permission.READ_CALL_LOG}, b -> {
+            if (b) {
+                List<CallLogBean> beans = ContentProviderHelper.queryPhone(this, startTime, System.currentTimeMillis());
+                if (beans.size() > 0) {
+                    Log.i("====>", String.valueOf(beans.size()));
+                }
+            }
+        });*/
+
+        requestPermission(new String[]{Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS}, b -> {
+            if (b) {
+                List<SmsLogBean> beans = ContentProviderHelper.querySms(this, startTime, System.currentTimeMillis());
+                if (beans.size() > 0) {
+                    Log.i("====>", String.valueOf(beans.size()));
+                }
+            }
+        });
     }
 }

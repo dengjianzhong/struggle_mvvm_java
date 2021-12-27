@@ -1,0 +1,52 @@
+{
+  "FoodNameIsShow": 0,
+  "FoodNameValue": "商品名称",
+  "FoodCountIsShow": 0,
+  "FoodCountValue": "数量",
+  "FoodPriceIsShow": 0,
+  "FoodPriceValue": "单价",
+  "FoodSubTotalIsShow": 0,
+  "FoodSubTotalValue": "小计",
+  "DNBFoodList": [
+    {
+      "FoodName": "包子包子包子包子包子包子包子包子包子包子包子包子",
+      "FoodCount": 1,
+      "FoodPrice": 30,
+      "SubTotal": 30,
+      "DNBSetMealFoodList": [
+      ]
+    },
+    {
+      "FoodName": "馒头",
+      "FoodCount": 10,
+      "FoodPrice": 30,
+      "SubTotal": 300,
+      "DNBSetMealFoodList": [
+      ]
+    },
+    {
+      "FoodName": "哈蜜瓜哈蜜瓜哈蜜瓜哈蜜瓜哈蜜瓜哈蜜瓜哈蜜瓜哈蜜瓜哈蜜瓜哈蜜瓜哈蜜瓜",
+      "FoodCount": 5,
+      "FoodPrice": 30,
+      "SubTotal": 150,
+      "DNBSetMealFoodList": [
+      ]
+    },
+    {
+      "FoodName": "扬州炒饭",
+      "FoodCount": 800,
+      "FoodPrice": 3000,
+      "SubTotal": 2400000,
+      "DNBSetMealFoodList": [
+      ]
+    },
+    {
+      "FoodName": "青椒肉丝",
+      "FoodCount": 10,
+      "FoodPrice": 30,
+      "SubTotal": 300,
+      "DNBSetMealFoodList": [
+      ]
+    }
+  ]
+}
