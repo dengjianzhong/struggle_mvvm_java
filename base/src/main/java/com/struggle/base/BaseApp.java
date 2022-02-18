@@ -38,17 +38,10 @@ public class BaseApp extends Application {
     }
 
     private void init() {
-        /**初始化Toast*/
-        TxToast.init(this);
-
-        /**初始化handler线程*/
-        IOHandler.init(this);
-
-        /**初始化屏幕参数*/
-        UIPix.init(this);
-
-        /**初始化SharedPreferences*/
-        SPManager.init(this);
+        TxToast.init(this);     //初始化Toast
+        IOHandler.init(this);   //初始化handler线程
+        UIPix.init(this);       //初始化屏幕参数
+        SPManager.init(this);   //初始化SharedPreferences
     }
 
     /**

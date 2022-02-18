@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CoordinatorScrollView">
+        <!--需要协调滑动的View-->
+        <attr name="coordinatorViewId" format="reference" />
+        <!--吸附在需要协调滑动View的顶部-->
+        <attr name="adsorptionId" format="reference" />
+        <!--ScrollView参照该View的高度设置为最大滑动距离，然后把滑动事件分发给需要协调的View-->
+        <attr name="scrollTargetId" format="reference" />
+        <!--需要协调滑动的View的高度-->
+        <!--<attr name="coordinatorViewMaxShowHeight" format="dimension" />-->
+    </declare-styleable>
+</resources>

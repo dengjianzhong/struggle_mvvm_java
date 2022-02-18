@@ -1,5 +1,7 @@
 package com.zhong.struggle_mvvm.view.adapter;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -27,6 +29,7 @@ public class CoorAdapter extends BaseQuickAdapter<Object, BaseViewHolder> {
 
     @Override
     protected void convert(@NonNull BaseViewHolder holder, Object o) {
-
+        holder.setText(R.id.tvCity, "位置" + holder.getAdapterPosition());
+        Log.i("===>", String.format("标题预加载位置%d....", holder.getAdapterPosition()));
     }
 }

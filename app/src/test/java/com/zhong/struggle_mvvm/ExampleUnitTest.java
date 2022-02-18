@@ -3,11 +3,8 @@ package com.zhong.struggle_mvvm;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -17,7 +14,7 @@ import java.util.stream.Stream;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
-        getSourceData().stream()
+        /*getSourceData().stream()
                 .flatMap((Function<List<String>, Stream<String>>) strings -> {
                     System.out.println("--------------");
                     return strings.stream();
@@ -39,8 +36,13 @@ public class ExampleUnitTest {
             }
         });
         System.out.println();
-
-
+*/
+        List<String> list = new ArrayList<>();
+        list.add("bot");
+        list.add("after");
+        list.add("foot");
+        list.add("cook");
+        Collections.sort(list);
     }
 
     /**

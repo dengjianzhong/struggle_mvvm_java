@@ -54,8 +54,22 @@ public class IOHandler {
             throw new RuntimeException("IOHandler is not initialized");
         }
 
-        mainHandler.post(runnable);
+        postMain(runnable, 0);
     }
+
+    /**
+     * 将 runnable添加到消息队列中。 runnable 将在此处理程序附加到的主线程上运行。
+     *
+     * @param runnable
+     */
+    public static void postMain(Runnable runnable, long delayMillis) {
+        if (mainHandler == null) {
+            throw new RuntimeException("IOHandler is not initialized");
+        }
+
+        mainHandler.postDelayed(runnable, delayMillis);
+    }
+
 
     /**
      * 将 runnable添加到消息队列中。 runnable 将在此处理程序附加到的子线程上运行。
@@ -67,7 +81,21 @@ public class IOHandler {
             throw new RuntimeException("IOHandler is not initialized");
         }
 
-        workHandler.post(runnable);
+        postWork(runnable, 0);
+    }
+
+    /**
+     * 将 runnable添加到消息队列中。 runnable 将在此处理程序附加到的子线程上运行。
+     *
+     * @param runnable
+     * @param delayMillis
+     */
+    public static void postWork(Runnable runnable, long delayMillis) {
+        if (workHandler == null) {
+            throw new RuntimeException("IOHandler is not initialized");
+        }
+
+        workHandler.postDelayed(runnable, delayMillis);
     }
 
     /**

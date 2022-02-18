@@ -2,11 +2,19 @@ package com.zhong.struggle_mvvm.view.activity;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Intent;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+
 import com.google.gson.Gson;
-import com.struggle.base.app.bean.SmsLogBean;
+import com.struggle.base.app.bean.CallLogBean;
 import com.struggle.base.base.mvvm.BaseVMActivity;
 import com.struggle.base.base.plugins.PermissionPlugin;
 import com.struggle.base.launcher.TxToast;
@@ -37,7 +45,7 @@ public class FrameworkActivity2 extends BaseVMActivity<ActivityFramework2Binding
         setTransparentStatusBar();
     }
 
-    public void onClick(View view) {
+    public synchronized void onClick(View view) {
         switch (view.getId()) {
             case R.id.button:
                 viewModel.requestArticleDetail("5e777432b8ea09cade05263f");
@@ -50,10 +58,26 @@ public class FrameworkActivity2 extends BaseVMActivity<ActivityFramework2Binding
                 startTime = System.currentTimeMillis();
                 break;
             case R.id.button5:
-                /*DNBFoodMessageBean bean = parseJson();
-                if (bean != null) {
+                MediaPlayer mediaPlayer = new MediaPlayer();
+                mediaPlayer.reset();
+                ActivityResultLauncher<Intent> launcher1 = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
 
-                }*/
+                    }
+                });
+                launcher1.launch(new Intent());
+
+                ActivityResultLauncher<String> launcher2 = registerForActivityResult(new ActivityResultContracts.CreateDocument(), new ActivityResultCallback<Uri>() {
+                    @Override
+                    public void onActivityResult(Uri result) {
+
+                    }
+                });
+                launcher2.launch("");
+                break;
+            case R.id.button6:
+                openActivity(CameraActivity.class);
                 break;
             default:
                 MyDialog dialog = new MyDialog();
@@ -110,22 +134,22 @@ public class FrameworkActivity2 extends BaseVMActivity<ActivityFramework2Binding
     protected void onRestart() {
         super.onRestart();
 
-        /*requestPermission(new String[]{Manifest.permission.READ_CONTACTS, Manifest.permission.READ_CALL_LOG}, b -> {
+        requestPermission(new String[]{Manifest.permission.READ_CALL_LOG}, b -> {
             if (b) {
                 List<CallLogBean> beans = ContentProviderHelper.queryPhone(this, startTime, System.currentTimeMillis());
                 if (beans.size() > 0) {
                     Log.i("====>", String.valueOf(beans.size()));
                 }
             }
-        });*/
+        });
 
-        requestPermission(new String[]{Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS}, b -> {
+        /*requestPermission(new String[]{Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS}, b -> {
             if (b) {
                 List<SmsLogBean> beans = ContentProviderHelper.querySms(this, startTime, System.currentTimeMillis());
                 if (beans.size() > 0) {
                     Log.i("====>", String.valueOf(beans.size()));
                 }
             }
-        });
+        });*/
     }
 }
